@@ -1,0 +1,135 @@
+/* Formularios */
+form{
+	margin: 0 auto;
+	margin-top: 1rem;	
+}
+
+/* Formulario de registro y edición */
+#data{
+	border-radius: .5rem;
+	padding: 1% 0;
+	margin-bottom: 2.5%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#data label, #data input, #data select, #data textarea{
+	display: block;
+	margin-bottom: .5rem;
+}
+
+#data input, #data select, #data textarea{
+	background-color: transparent;
+	outline: 0;
+	border: 0;
+	border-bottom: .1rem solid gray;
+	color: #262626;	
+}
+
+#data textarea{
+	resize: none;
+	height: 17.5vh;
+}
+
+#data input:focus, #data select:focus, #data textarea:focus{
+	border-color: #008B8B;	
+}
+
+#data [type=submit]{
+	display: block;
+	margin: 0 auto;
+	cursor: pointer;
+	margin-top: 2.5%;
+	border: .1rem black solid;
+	outline: 0;
+	background-color: #FFFFEF;
+	font-weight: normal;	
+	padding: 0 .5rem;
+	user-select: none;
+	color: #008080;
+	border-color: #008080;
+}
+
+#data section, #data p{
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+#data section, #data div, #data p{
+	width: 100%;
+}
+
+#data label{
+	transition: all .2s;
+	transform-origin: top left !important;
+	font-weight: bold;
+	cursor: pointer;
+	text-align: left;
+}
+
+#data input:focus + label, #data select:focus + label, #data textarea:focus + label{
+	color: #008B8B;
+}
+
+/* Cuando la caja/área de texto no tenga el enfoque */
+#data input:not(:focus) + label, #data textarea:not(:focus) + label{
+	transform: translateY(1.25em) scale(1.15) !important;
+	opacity: .5;
+	font-weight: normal;
+}
+
+/* Cuando la caja/área de texto tenga el enfoque */
+#data input:not(:placeholder-shown) + label, #data textarea:not(:placeholder-shown) + label{
+	transform: translateY(0em) scale(1) !important;
+	opacity: 1;
+	font-weight: bold;
+}
+
+/* Todas las cajas de texto de los formularios de consulta tendrán su contenido en mayúsculas */
+.pide{
+	text-transform: uppercase;
+}
+
+/* Pantalla grande */
+@media all and (min-width: 850px){
+	#data{
+		width: 85%;
+	}
+
+	#data input:not([type=submit]), #data select, #data label, #data textarea{
+		width: 40%;
+		font-size: 1rem;
+	}
+}
+
+/* Pantalla chica */
+@media all and (max-width: 850px){
+	#data{
+		width: 85%;
+	}	
+
+	#data input:not([type=submit]), #data select, #data label, #data textarea{
+		width: 85%;
+		font-size: .9rem;
+	}
+
+	#data [type=submit]{
+		margin-bottom: 5px;
+	}
+}
+
+/* HOVER */
+@media (hover: hover){
+	#data [type=submit]:hover{
+		transform: scale(.95);
+		font-weight: bold;	
+		color: #FFFFEF;
+		background-color: #008080;
+	}
+}

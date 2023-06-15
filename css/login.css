@@ -1,0 +1,328 @@
+*{
+	font-family: 'Catamaran', sans-serif;
+	transition: all ease .1s;
+	-webkit-transition: all ease .1s;
+	-moz-transition: all ease .1s;
+	-o-transition: all ease .1s;
+}
+
+html, body{
+	width: 100%;
+	height: 100%;
+}
+
+body{
+	margin: 0;
+	background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+}
+
+*::-webkit-scrollbar{
+    width: 12.5px;
+}
+ 
+*::-webkit-scrollbar-track{
+    background-color: #696969;   
+}
+ 
+*::-webkit-scrollbar-thumb{
+    background-color: #C0C0C0;
+}
+
+/* Título del formulario */
+h1{
+	font-size: 1.3rem;
+	color: #2F3F3F;
+	margin-bottom: .15rem;
+}
+
+/* Subtítulo del formulario */
+h2{
+	font-size: 1.05rem;
+	color: #191940;
+	margin-top: .1rem;
+}
+
+h1, h2{
+	text-align: center;	
+	font-weight: 600;
+}
+
+/* Imagen del formulario */
+img{
+	display: block;
+	margin: 0 auto;
+}
+
+/* Sección principal */
+body > section{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Formulario */
+form{
+	background-color: rgba(255, 255, 255, .4);
+	border-radius: .5rem;	
+	margin-bottom: 2.5%;
+	display: flex;
+	align-items: center;
+	/*justify-content: center;*/
+	flex-direction: column;
+	overflow: auto;
+	max-height: 85vh;
+	box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+	animation-name: showForm;
+	animation-duration: .5s;
+}
+
+/* Secciones del formulario */
+form section:not(.rememberData){
+	width: 100%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column-reverse;
+}
+
+/* Cajas de texto */
+form input:not([type=submit]){
+	background-color: transparent !important;
+	outline: 0;
+	border: 0;
+	border-bottom: .1rem solid #262626;	
+}
+
+/* Etiquetas */
+form label{
+	position: relative;
+	transition: all .2s;
+	transform-origin: top left !important;
+	font-weight: 500;
+	cursor: pointer;
+	text-align: left;
+	user-select: none;
+}
+
+/* Cajas y etiquetas */
+form input:not([type=submit]), form label{
+	display: block;
+	margin-bottom: .5rem;
+	opacity: .5;
+	color: #262626;
+}
+
+form input:focus, form input:focus + label{
+	opacity: 1;
+}
+
+/* Cuando la caja de texto no tenga el enfoque */
+form input:not(:focus) + label{
+	transform: translateY(1.55em) scale(1.15) !important;
+	opacity: .5;
+	font-weight: normal;
+}
+
+/* Cuando la caja de texto tenga el enfoque */
+form input:not(:placeholder-shown) + label{
+	transform: translateY(0em) scale(1) !important;
+	opacity: 1;
+	font-weight: 500;
+}
+
+/* Color de texto de fondo en las cajas de texto sin contenido */
+::placeholder{
+    color: snow;
+}
+
+/* Contenedor de los logos */
+#logos{
+	text-align: center;
+}
+
+/* Logos de la Municipalidad Distrital de Pocollay y de la Presidencia del Consejo de Ministros */
+#logoMDP, #logoPCM{
+	width: 50px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#logoPCM{
+	margin-top: 22.5px;
+}
+
+/* Botón de envío */
+form [type=submit]{
+	display: block;
+	background-color: #2e2759;
+	color: #fff;
+	text-transform: uppercase;
+	margin: 0 auto;
+	cursor: pointer;
+	margin-top: 2.5%;
+	border: 0;
+	opacity: .8;
+	padding: .35rem 2.5rem;
+	transition: all ease .5s;
+}
+
+/* Slider para recordar los datos */
+.slide{
+	display: inline-flex;
+	vertical-align: middle;
+	border-radius: 1rem;
+	user-select: none;
+	transition: .5s ease;
+}
+
+#slider{
+	margin: 1.5px;
+}
+
+#sliderBtn{
+	background-color: snow;	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #CD5C5C;
+}
+
+/* Clases para el cambio de color del fondo del slider */
+.on{
+	background-color: #008B8B;
+}
+
+.off{
+	background-color: #CD5C5C;
+}
+
+/* Animación para el formulario de identificación */
+@keyframes showForm{
+	from{
+		opacity: 0;
+		transform: scaleY(0);
+	}
+
+	to{
+		opacity: 1;
+		transform: scaleY(1);
+	}
+}
+
+/* Animación para el botón del formulario */
+@keyframes animateButton{
+	0%{
+		transform: scale(1);
+	}
+
+	25%{
+		transform: scale(.9);
+	}
+
+	50%{
+		transform: scale(1);
+	}
+
+	75%{
+		transform: scale(.9);
+	}
+
+	100%{
+		transform: scale(1);
+	}
+}
+
+/* Pantalla grande */
+@media all and (min-width: 850px){
+	*{
+		font-size: 1rem;
+	}
+
+	img{
+		width: 80px;
+	}
+
+	form{
+		width: 40%;
+		padding: .75rem;
+	}
+
+	form input:not([type=submit]), form label{
+		width: 60%;
+	}
+
+	#slider{
+		width: 50px;
+		height: 25px;
+	}
+
+	#sliderBtn{
+		width: 25px;
+		height: 25px;
+	}
+
+	/* Clase para mover el botón del slider */
+	.move{
+		transform: translateX(25px);
+		color: #008B8B !important;
+	}
+}
+
+/* Pantalla chica */
+@media all and (max-width: 850px){
+	*{
+		font-size: .95rem;
+	}
+
+	img{
+		width: 25%;
+	}
+
+	form{
+		width: 60%;
+		padding: 1rem 2rem;
+	}
+
+	form input:not([type=submit]), form label{
+		width: 80%;
+	}
+
+	#slider{
+		width: 40px;
+		height: 20px;
+	}
+
+	#sliderBtn{
+		width: 20px;
+		height: 20px;
+	}
+
+	/* Clase para mover el botón del slider */
+	.move{
+		transform: translateX(20px);
+		color: #008B8B !important;
+	}
+}
+
+/* Cursor sobre elementos */
+@media (hover: hover){
+	form [type=submit]:hover{
+	    opacity: 1;
+	    animation-name: animateButton;
+	    animation-duration: 1.5s;
+	    animation-iteration-count: 2;
+	}
+
+	.slide:hover{
+		cursor: pointer;
+		filter: brightness(1.1);		
+	}
+
+	#sliderTxt:hover{
+		font-weight: bold;
+	}
+}

@@ -1,0 +1,104 @@
+{
+  "estado": "ok",
+  "response": {
+    "opConsultarRNGTResponse": {
+      "respuesta": {
+        "@type": "tns:respuestaType",
+        "fechaSunedu": {
+          "@type": "xsd:string",
+          "value": 20230504
+        },
+        "horaSunedu": {
+          "@type": "xsd:string",
+          "value": 162337
+        },
+        "cGenerico": {
+          "@type": "xsd:string",
+          "value": "00000"
+        },
+        "dGenerica": {
+          "@type": "xsd:string",
+          "value": "PROCESO OK."
+        }
+      },
+      "listaGTPersona": {
+        "@type": "tns:listaGTPersonaType",
+        "gtPersona": {
+          "@type": "tns:gtPersonaType",
+          "tipoDocumento": {
+            "@type": "xsd:string",
+            "value": "DNI"
+          },
+          "nroDocumento": {
+            "@type": "xsd:string",
+            "value": 45287124
+          },
+          "apellidoPaterno": {
+            "@type": "xsd:string",
+            "value": "LOPEZ"
+          },
+          "apellidoMaterno": {
+            "@type": "xsd:string",
+            "value": "ESPINOZA"
+          },
+          "nombres": {
+            "@type": "xsd:string",
+            "value": "ALEXIS EVERTT"
+          },
+          "abreviaturaTitulo": {
+            "@type": "xsd:string",
+            "value": "B"
+          },
+          "tituloProfesional": {
+            "@type": "xsd:string",
+            "value": "BACHILLER EN INGENIERÍA DE SISTEMAS E INFORMÁTICA"
+          },
+          "universidad": {
+            "@type": "xsd:string",
+            "value": "Universidad Privada Telesup S.A.C."
+          },
+          "especialidad": {
+            "@type": "xsd:string",
+            "value": "-"
+          },
+          "pais": {
+            "@type": "xsd:string",
+            "value": "Perú"
+          },
+          "tipoInstitucion": {
+            "@type": "xsd:string",
+            "value": "U"
+          },
+          "tipoGestion": {
+            "@type": "xsd:string",
+            "value": "P"
+          },
+          "fechaEmision": {
+            "@type": "xsd:string",
+            "value": "21/10/2021"
+          },
+          "resolucion": {
+            "@type": "xsd:string",
+            "value": "N° 1225-2021-UPTELESUP-R"
+          },
+          "fechaResolucion": {
+            "@type": "xsd:string",
+            "value": "20/10/2021"
+          },
+          "flgResolucionNulidad": {
+            "@type": "xsd:string",
+            "value": "-"
+          },
+          "nroResolucionNulidad": {
+            "@type": "xsd:string",
+            "value": "-"
+          },
+          "fechaResolucionNulidad": {
+            "@type": "xsd:string",
+            "value": "-"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+    "listarAsientosSIRSARPResponse": {
+        "asientos": {
+            "transaccion": 18849358,
+            "nroTotalPag": 9,
+            "listAsientos": [
+                {
+                    "idImgAsiento": 42991126,
+                    "numPag": 1,
+                    "tipo": "ASIENTO",
+                    "listPag": {
+                        "nroPagRef": 9,
+                        "pagina": 1
+                    }
+                },
+                {
+                    "idImgAsiento": 42991125,
+                    "numPag": 2,
+                    "tipo": "ASIENTO",
+                    "listPag": [
+                        {
+                            "nroPagRef": 7,
+                            "pagina": 1
+                        },
+                        {
+                            "nroPagRef": 8,
+                            "pagina": 2
+                        }
+                    ]
+                },
+                {
+                    "idImgAsiento": 32234784,
+                    "numPag": 1,
+                    "tipo": "ASIENTO",
+                    "listPag": {
+                        "nroPagRef": 6,
+                        "pagina": 1
+                    }
+                },
+                {
+                    "idImgAsiento": 32234783,
+                    "numPag": 1,
+                    "tipo": "ASIENTO",
+                    "listPag": {
+                        "nroPagRef": 5,
+                        "pagina": 1
+                    }
+                },
+                {
+                    "idImgAsiento": 32234782,
+                    "numPag": 1,
+                    "tipo": "ASIENTO",
+                    "listPag": {
+                        "nroPagRef": 4,
+                        "pagina": 1
+                    }
+                },
+                {
+                    "idImgAsiento": 32234781,
+                    "numPag": 1,
+                    "tipo": "ASIENTO",
+                    "listPag": {
+                        "nroPagRef": 3,
+                        "pagina": 1
+                    }
+                },
+                {
+                    "idImgAsiento": 32234780,
+                    "numPag": 2,
+                    "tipo": "ASIENTO",
+                    "listPag": [
+                        {
+                            "nroPagRef": 1,
+                            "pagina": 1
+                        },
+                        {
+                            "nroPagRef": 2,
+                            "pagina": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

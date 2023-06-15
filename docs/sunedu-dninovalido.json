@@ -1,0 +1,30 @@
+{
+  "estado": "ok",
+  "response": {
+    "opConsultarRNGTResponse": {
+      "respuesta": {
+        "@type": "tns:respuestaType",
+        "fechaSunedu": {
+          "@type": "xsd:string",
+          "value": 20230504
+        },
+        "horaSunedu": {
+          "@type": "xsd:string",
+          "value": 162617
+        },
+        "cGenerico": {
+          "@type": "xsd:string",
+          "value": 50001
+        },
+        "dGenerica": {
+          "@type": "xsd:string",
+          "value": "DATO NO ENCONTRADO EN LA BASE DE DATOS - La falta de inscripción de un grado académico y/o título profesional en el Registro Nacional de Grados y Títulos no significa su inexistencia, pues los datos que figuran son declarativos y proporcionados por las universidades, instituciones y escuelas de educación superior, bajo su responsabilidad. Cualquier duda o consulta enviarla al correo electrónico:consultasgradosytitulos@sunedu.gob.pe"
+        }
+      },
+      "listaGTPersona": {
+        "@nil": "true",
+        "@type": "tns:listaGTPersonaType"
+      }
+    }
+  }
+}

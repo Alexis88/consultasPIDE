@@ -1,0 +1,158 @@
+{
+  "estado": "ok",
+  "response": {
+    "@type": "tns:listaGTPersonaType",
+    "gtPersona": [
+      {
+        "@type": "tns:gtPersonaType",
+        "tipoDocumento": {
+          "@type": "xsd:string",
+          "value": "DNI"
+        },
+        "nroDocumento": {
+          "@type": "xsd:string",
+          "value": "00486750"
+        },
+        "apellidoPaterno": {
+          "@type": "xsd:string",
+          "value": "ESPINOZA"
+        },
+        "apellidoMaterno": {
+          "@type": "xsd:string",
+          "value": "OVIEDO"
+        },
+        "nombres": {
+          "@type": "xsd:string",
+          "value": "ROCIO DE LOS MILAGROS"
+        },
+        "abreviaturaTitulo": {
+          "@type": "xsd:string",
+          "value": "T"
+        },
+        "tituloProfesional": {
+          "@type": "xsd:string",
+          "value": "LICENCIADO EN ADMINISTRACION"
+        },
+        "universidad": {
+          "@type": "xsd:string",
+          "value": "Universidad Inca Garcilaso de la Vega Asociación Civil"
+        },
+        "especialidad": {
+          "@type": "xsd:string",
+          "value": "-"
+        },
+        "pais": {
+          "@type": "xsd:string",
+          "value": "Perú"
+        },
+        "tipoInstitucion": {
+          "@type": "xsd:string",
+          "value": "U"
+        },
+        "tipoGestion": {
+          "@type": "xsd:string",
+          "value": "P"
+        },
+        "fechaEmision": {
+          "@type": "xsd:string",
+          "value": "08/06/2015"
+        },
+        "resolucion": {
+          "@type": "xsd:string",
+          "value": "0569-2015-CU-UIGV"
+        },
+        "fechaResolucion": {
+          "@type": "xsd:string",
+          "value": "08/06/2015"
+        },
+        "flgResolucionNulidad": {
+          "@type": "xsd:string",
+          "value": "-"
+        },
+        "nroResolucionNulidad": {
+          "@type": "xsd:string",
+          "value": "-"
+        },
+        "fechaResolucionNulidad": {
+          "@type": "xsd:string",
+          "value": "-"
+        }
+      },
+      {
+        "@type": "tns:gtPersonaType",
+        "tipoDocumento": {
+          "@type": "xsd:string",
+          "value": "DNI"
+        },
+        "nroDocumento": {
+          "@type": "xsd:string",
+          "value": "00486750"
+        },
+        "apellidoPaterno": {
+          "@type": "xsd:string",
+          "value": "ESPINOZA"
+        },
+        "apellidoMaterno": {
+          "@type": "xsd:string",
+          "value": "OVIEDO"
+        },
+        "nombres": {
+          "@type": "xsd:string",
+          "value": "ROCIO DE LOS MILAGROS"
+        },
+        "abreviaturaTitulo": {
+          "@type": "xsd:string",
+          "value": "B"
+        },
+        "tituloProfesional": {
+          "@type": "xsd:string",
+          "value": "BACHILLER EN CIENCIAS ADMINISTRATIVAS Y MARKETING ESTRATEGICO"
+        },
+        "universidad": {
+          "@type": "xsd:string",
+          "value": "Universidad José Carlos Mariátegui"
+        },
+        "especialidad": {
+          "@type": "xsd:string",
+          "value": "-"
+        },
+        "pais": {
+          "@type": "xsd:string",
+          "value": "Perú"
+        },
+        "tipoInstitucion": {
+          "@type": "xsd:string",
+          "value": "U"
+        },
+        "tipoGestion": {
+          "@type": "xsd:string",
+          "value": "P"
+        },
+        "fechaEmision": {
+          "@type": "xsd:string",
+          "value": "13/11/2014"
+        },
+        "resolucion": {
+          "@type": "xsd:string",
+          "value": "1413-2014-CU-UJCM"
+        },
+        "fechaResolucion": {
+          "@type": "xsd:string",
+          "value": "13/11/2014"
+        },
+        "flgResolucionNulidad": {
+          "@type": "xsd:string",
+          "value": "-"
+        },
+        "nroResolucionNulidad": {
+          "@type": "xsd:string",
+          "value": "-"
+        },
+        "fechaResolucionNulidad": {
+          "@type": "xsd:string",
+          "value": "-"
+        }
+      }
+    ]
+  }
+}

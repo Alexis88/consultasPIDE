@@ -1,0 +1,89 @@
+/* FOTOS */
+
+.drop, [type=file]{
+	border: 2px dashed gray;
+	border-radius: 5px;
+	text-align: center;
+	font: 25pt bold "Vollkorn" !important;
+    color: gray;
+    user-select: none;
+    cursor: pointer;
+}
+
+.drop{
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	word-wrap: break-word;
+}
+
+.preview{
+	display: block;
+	margin: 0 auto;
+}
+
+[type=file]{	
+	opacity: 0;
+	margin-top: 0;
+}
+
+.textDrop{
+	font-size: 1rem;
+	text-align: center;	
+}
+
+.loading{
+	-webkit-animation: glow 1s ease-in-out infinite alternate;
+	-moz-animation: glow 1s ease-in-out infinite alternate;
+	animation: glow 1s ease-in-out infinite alternate;
+}
+
+.droppable{
+	user-select: none;
+}
+
+.textParent{
+	text-align: center !important;
+}
+
+@keyframes glow{
+	from{
+		color: gray;
+    	text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+	}
+	to{
+		color: black;
+		text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+	}
+}
+
+@media all and (min-width: 920px){
+	.drop{
+		width: 15vw !important;
+		height: 10vh !important;
+		padding: 50px 25px 30px 25px !important;
+	}
+
+	.preview{
+		max-height: 25vh;
+		max-width: 45%;
+		margin-bottom: 1rem;
+		margin-top: 1rem;
+	}
+}
+
+@media all and (max-width: 920px){
+	.drop{
+		width: 35vw !important;
+		height: 15vh !important;
+		padding: 45px 25px 30px 25px !important;
+	}
+
+	.preview{
+		max-height: 30vh;
+		max-width: 75%;
+		margin-bottom: 1rem;
+		margin-top: 1rem;		
+	}
+}

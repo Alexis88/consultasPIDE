@@ -1,0 +1,196 @@
+table:not(.modalFront table), form:not(.modalFront form){
+	animation-name: showUp;
+	animation-duration: .75s;
+}
+
+/* Tablas */
+table{	
+	margin: 0 auto;
+	margin-top: 1rem;
+	margin-bottom: 2.5rem;
+	word-wrap: break-word;
+	border-collapse: collapse;	
+}
+
+table:not(.modalFront table){
+	width: 85%;
+	max-width: 85%;
+}
+
+/* Tablas dentro de una ventana modal */
+.modalFront table{
+	width: 100%;
+}
+
+/* Cabeceras de tablas */
+table th{
+	background-color: rgb(48, 81, 101);
+	color: white;
+	font-weight: normal;
+	user-select: none;
+	text-transform: capitalize;
+	padding: .5rem .25rem;
+}
+
+/* Estilos generales para las cabeceras y celdas de las tablas */
+table th, table td, table td *{
+	word-wrap: break-word;
+	text-align: center;
+	font-size: .915rem !important;
+}
+
+/* Celdas de las tablas */
+table td{
+	padding: .3rem .25rem;
+	vertical-align: middle;
+}
+
+/* Imágenes dentro de las tablas */
+table img{
+	margin-right: 1%;
+	cursor: pointer;
+	user-select: none;
+	display: inline-block;
+	vertical-align: middle;
+	width: 30px;
+}
+
+/* Color de fondo de las filas pares */
+table tbody tr:nth-child(even){
+	background-color: #DCDCDC;
+	color: #262626;
+}
+
+/* Color de fondo de las filas impares */
+table tbody tr:nth-child(odd){
+	background-color: #F5F5F5;
+	color: #262626;
+}
+
+/* Cajas de texto y combos dentro de las tablas */
+table input, table select{
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+	width: 90% !important;
+}
+
+/* Formulario de búsqueda para listados */
+#search{	
+	margin-bottom: 1%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Tamaño de fuente para todo el contenido del formulario de búsqueda */
+#search *{
+	font-size: .95rem;
+}
+
+/* Estilos para las cajas de texto y combos cuando tengan el enfoque */
+#search input:focus, #search select:focus{
+	border-color: #008B8B;	
+}
+
+/* Secciones del formulario de búsqueda */
+#search section{
+	display: flex;
+	flex-direction: column-reverse;
+	margin-bottom: 1.5%;
+	align-items: center;
+	justify-content: center;	
+}
+
+/* Etiquetas del formulario de búsqueda */
+#search section > label {
+	transition: all .2s;
+	transform-origin: top left;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+/* Las etiquetas del formulario de búsqueda se mueven hacia arriba al enfocarse la caja de texto */
+#search input:not(:placeholder-shown) + label{
+	transform: translateY(0em) scale(1) !important;
+	opacity: 1 !important;
+	font-weight: bold !important;
+}
+
+#search section > input:focus + label, #search section > select:focus + label{
+	color: #008B8B;
+}
+
+#search input, #search select, #search textarea{
+	background-color: transparent;
+	outline: 0;
+	border: 0;
+	border-bottom: .1rem solid gray;
+	color: #262626;
+}
+
+/* Animación que muestra a las tablas y formularios */
+@keyframes showUp{
+	from{
+		transform: scaleX(0);
+		opacity: 0;
+	}
+
+	to{
+		transform: scaleX(1);
+		opacity: 1;
+	}
+}
+
+/* Pantalla grande */
+@media all and (min-width: 850px){
+	#search{
+		width: 80%;
+		margin-top: 5rem;
+	}
+
+	#search section{
+		margin-right: 1%;		
+	}
+
+	#search input:not([type=date]):not(:focus) + label{
+		transform: translateY(1.25em) translateX(-.5em) scale(1.15);
+		font-weight: normal;
+		opacity: .5;
+	}
+}
+
+/* Pantalla chica */
+@media all and (max-width: 850px){
+	#search{
+		flex-direction: column;
+		width: 90%;
+		margin-top: 5rem;
+	}
+
+	#search section{
+		width: 75%;
+		margin-bottom: 1%;
+	}
+
+	#search section input, #search section label, #search section select{
+		width: 75%;
+	}
+
+	#search input:not([type=date]):not(:focus) + label{
+		transform: translateY(1.25em) translateX(0em) scale(1.15);
+		font-weight: normal;
+		opacity: .5;
+	}
+}
+
+/* HOVER */
+@media (hover: hover){
+	table tbody tr:hover{
+		filter: sepia(50%);
+	}
+
+	.darkRows:hover{
+		filter: sepia(85%) !important;	
+	}
+}

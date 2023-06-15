@@ -1,0 +1,26 @@
+{
+    "getPrediosResponse": {
+        "return": {
+            "@type": "SOAP-ENC:Array",
+            "@arrayType": "tns:predioStruct[1]",
+            "item": {
+                "@type": "tns:predioStruct",
+                "cod": {
+                    "@type": "xsd:string",
+                    "value": 4
+                },
+                "msg": {
+                    "@type": "xsd:string",
+                    "value": "DOC.IDENTIDAD INVALIDO"
+                },
+                "nombre_completo": {
+                    "@type": "xsd:string"
+                },
+                "predio": {
+                    "@type": "SOAP-ENC:Array",
+                    "@arrayType": "tns:preStruct[0]"
+                }
+            }
+        }
+    }
+}

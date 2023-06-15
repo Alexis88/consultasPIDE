@@ -1,0 +1,136 @@
+/* Contenedor de los bloques de servicios y contenedor de botones de opciones */
+#servicios, .servicio p{
+	display: flex;
+	align-items: stretch;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+/* Bloques de servicios */
+.servicio{
+	margin: 1rem;
+	user-select: none;
+	border-radius: 1rem;
+	padding: .5rem .75rem;
+	box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+	animation-name: showServices;
+	animation-duration: .5s;
+}
+
+/* Se intercalan los colores de fondo de los bloques de servicios */
+.servicio:nth-child(even){
+	background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+}
+
+.servicio:nth-child(odd){
+	background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+/* Logo del bloque de servicio */
+.servicio .logo{
+	display: block;
+	margin: 0 auto;
+	margin-top: .15rem;
+	width: 100px;
+	border-radius: 5rem;
+}
+
+/* Botones de opciones */
+.serviceButton{
+	width: 30px;
+}
+
+/* Subtítulos (h3 es para los títulos) */
+h4, h5{
+	margin: .5px 2.75px;
+	text-align: left !important;
+}
+
+/* Muestra en gris los bloques de los servicios que no puede usar el usuario */
+.inhabilitado{
+	filter: grayscale(100%);
+}
+
+/* Botones para mostrar las partidas registrales */
+.verPartida{
+	background-color: #CD5C5C;
+	color: #F0FFF0;
+	border: 1px #F0E68C solid;
+	user-select: none;
+	padding: 2px 3.5px;
+}
+
+/* Animación que muestra los cuadros de servicios */
+@keyframes showServices{
+	from{
+		transform: scale(.95);
+	}
+
+	to{
+		transform: scale(1);
+	}
+}
+
+/* Pantalla grande */
+@media all and (min-width: 850px){
+	.servicio{
+		width: 23.5%;
+	}
+
+	h3{
+		font-size: 1.35rem;
+	}
+
+	h4{
+		font-size: 1rem;
+	}
+
+	h5{
+		font-size: .95rem;
+	}
+}
+
+/* Pantalla chica */
+@media all and (max-width: 850px){
+	.servicio{
+		width: 75%;
+	}
+
+	h3{
+		font-size: 1.25rem;
+	}
+
+	h4{
+		font-size: 1rem;
+	}
+
+	h5{
+		font-size: .925rem;
+	}
+}
+
+/* Hover */
+@media (hover: hover){
+	.servicio:hover{
+		cursor: pointer;
+		transform: scale(1.02);
+	}
+
+	.servicio:not(.inhabilitado):hover{
+		filter: brightness(1.15);
+	}
+
+	.servicio.inhabilitado:hover{
+		filter: brightness(1.15) grayscale(100%);
+	}
+
+	.serviceButton:hover{
+		cursor: pointer;
+		transform: scale(1.1);
+	}
+
+	.verPartida:hover{
+		cursor: pointer;
+		filter: brightness(1.15);
+	}
+}

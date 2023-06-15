@@ -1,0 +1,378 @@
+*:not(#results *){
+	font-family: 'Catamaran', sans-serif;
+	transition: all ease .175s;
+	-webkit-transition: all ease .175s;
+	-moz-transition: all ease .175s;
+	-o-transition: all ease .175s;
+}
+
+html, body{
+	width: 100%;
+	height: 100%;
+}
+
+body{
+	margin: 0;	
+	background-color: #FFFFEF;
+	overflow-x: hidden;
+}
+
+/* Scrollbar */
+body::-webkit-scrollbar{
+    width: 14px;
+}
+
+/* Botón para cambiar el tema */
+#themeBtn{
+	position: absolute;
+	top: .5rem;
+	left: 50%;
+	padding: .75rem;
+	background-color: transparent;
+	border-color: transparent;
+	border-radius: 5rem;
+	transform: translateX(-50%);
+	transition: .3s ease;
+	width: 20px;
+	user-select: none;
+	z-index: 8888;
+}
+
+/* Colores de fondo y textos para visualización oscura */
+.dark{
+	background-color: #15202B !important;
+}
+
+.darkSelect{
+	background-color: #15202B !important;
+}
+
+.darkMenuBtn, .darkText{
+	color: #FFFFEF !important;
+}
+
+.darkText:focus{
+	border-color: #FFFFEF !important;
+}
+
+.darkText::-webkit-calendar-picker-indicator{
+    filter: invert(97%) sepia(10%) saturate(630%) hue-rotate(318deg) brightness(103%) contrast(109%);
+}
+
+.darkSubmit{
+	background-color: transparent !important;
+	color: #FFFFEF !important;
+	border-color: #FFFFEF !important;
+}
+
+.darkRows{
+	color: #FFFFEF !important;
+}
+
+.darkRows:nth-child(even){
+	background-color: rgba(220, 220, 220, .25);
+}
+
+.darkRows:nth-child(odd){
+	background-color: rgba(245, 245, 245, .25);
+}
+
+/* Color del ícono del tema claro */
+.iconColor{
+	filter: invert(97%) sepia(10%) saturate(630%) hue-rotate(318deg) brightness(103%) contrast(109%);
+}
+
+*::-webkit-scrollbar{
+    width: 12.5px;
+}
+ 
+*::-webkit-scrollbar-track{
+    background-color: #696969;   
+}
+ 
+*::-webkit-scrollbar-thumb{
+    background-color: #C0C0C0;
+}
+
+/* Color del texto seleccionado */
+::selection{
+	background-color: #15202B;
+	color: #FFFFEF;
+}
+
+[class*=dark]::selection{
+	background-color: #FFFFEF;
+	color: #15202B;
+}
+
+/* Títulos y subtítulos */
+h1:not([id^=modalFront] h1){
+	position: fixed;	
+	top: .25rem;
+	animation-name: showTitle;
+	animation-duration: .75s;
+	right: 0;
+	background-color: rgba(48, 81, 101, .85);
+	color: #FFFFEF;	
+}
+
+h2, h3, h4, h5{
+	color: #304145;
+	text-align: center;
+}
+
+/* Etiquetas de formulario */
+form label{
+	user-select: none;
+}
+
+/* Cuadro de resultados de búsquedas */
+#results{	
+	margin: 0 auto;
+	margin-top: 2.5px;
+	font-family: 'Quicksand', sans-serif;	
+}
+
+#results *{
+	font-size: .95rem !important;
+}
+
+/* GIF de espera */
+.wait{
+	width: 70px;
+	display: block;
+	margin: 0 auto;
+}
+
+/* Botones para añadir/quitar campos */
+.add, .del{
+	cursor: pointer;
+	font-weight: bold;	
+	user-select: none;
+}
+
+/* Botón para añadir servicios */
+#addService{
+	display: block;
+	margin: 0 auto;
+	cursor: pointer;
+	margin-top: 2.5%;
+	border: .1rem black solid;
+	outline: 0;
+	background-color: #CD5C5C;	
+	font-weight: normal;	
+	padding: 0 .5rem;
+	user-select: none;
+	color: #fff;
+}
+
+/* Clase para mostrar elementos en formato de bloque */
+.show{
+	display: block !important;
+}
+
+/* Clase para ocultar elementos */
+.hide{
+    display: none !important;
+}
+
+/* Clase para mostrar elementos en formato flex */
+.flex{
+	display: flex !important;
+}
+
+/* Líneas horizontales divisorias */
+hr{
+	width: 65%;
+}
+
+/* Botones para subir (scroll) y para abrir un formulario de registro */
+#subir, #crear{
+	position: fixed;
+	background: #456A7F;	
+	text-align: center;
+	color: snow;	
+	font-size: 1.1rem;
+	border-radius: 5rem;
+	bottom: 1%;		
+	user-select: none;
+}
+
+#subir{
+	opacity: 0;
+	right: 1%;
+}
+
+#crear{
+	opacity: .85;
+	left: 1%;
+}
+
+#crear:active{
+	transform: scale(.9);
+}
+
+/* Pie de página */
+footer{
+	margin-top: 5vh;
+}
+
+/* Enlaces */
+a{
+	text-decoration: none;
+	color: #4169E1;
+}
+
+/* Párrafos de respuesta de los servicios */
+.rest{
+	margin: .1rem;
+}
+
+/* Imágenes en la ventana modal que podrán descargarse */
+[data-download]{
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 1.5px;
+}
+
+/* Íconos de las notificaciones */
+.notificationImg{
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	margin-right: 5px;
+}
+
+/* Animación que muestra el título de la vista */
+@keyframes showTitle{
+	from{
+		right: -30rem;
+	}
+
+	to{
+		right: 0;
+	}
+}
+
+/* Pantalla grande */
+@media all and (min-width: 850px){
+	*{
+		font-size: 1.025rem;
+	}
+
+	h1{		
+		font-size: 1.25rem;	
+		padding: .15rem 2rem;
+	}
+
+	#logo{
+		width: 7.5%;
+	}
+
+	.mediaModal{
+		max-width: 65vw;
+		max-height: 75vh;
+	}
+
+	.noModalForm{
+		margin-top: 5rem;
+	}
+
+	#results{
+		width: 80%;
+	}
+
+	[data-download]{
+		width: 75%;
+	}
+
+	#subir{
+		padding: 20px 25px;
+	}
+
+	#crear{
+		padding: 17.5px 27.5px;
+	}
+}
+
+/* Pantalla chica */
+@media all and (max-width: 850px){
+	*{
+		font-size: 1rem;
+	}
+
+	h1{		
+		font-size: 1.1rem;	
+		padding: .15rem 1rem;
+	}
+
+	#logo{
+		width: 17.5%;
+	}
+
+	.mediaModal{
+		max-width: 75vw;
+		max-height: 85vh;
+	}
+
+	.noModalForm{
+		margin-top: 5rem;
+	}
+
+	#results{
+		width: 90%;
+	}
+
+	[data-download]{
+		width: 90%;
+	}
+
+	#subir{
+		padding: 12.5px 17.5px;
+	}
+
+	#crear{
+		padding: 12.5px 22.5px;
+	}
+}
+
+/* HOVER */
+@media (hover: hover){
+	table img:active{
+		transform: scale(.9);
+	}
+
+	#addService:hover{
+		transform: scale(.95);	
+		font-weight: bold;	
+		color: #CD5C5C;
+		border-color: #CD5C5C;
+		background-color: #fff;
+	}
+
+	#crear:hover{
+		cursor: pointer;
+		opacity: 1;
+	}
+
+	[data-download]:hover, .modalMedia:hover{
+		cursor: pointer;
+	}
+
+	#themeBtn:hover{
+		cursor: pointer;
+		background-color: rgba(255, 255, 255, 1);
+		filter: invert(97%) sepia(10%) saturate(630%) hue-rotate(318deg) brightness(103%) contrast(109%);
+	}
+
+	.iconColor:hover{
+		background-color: rgba(255, 255, 239, 1) !important;
+		filter: initial !important;
+	}
+
+	.darkSubmit:hover{
+		background-color: #FFFFEF !important;
+		color: #15202B !important;
+		border-color: #15202B !important;
+	}
+}

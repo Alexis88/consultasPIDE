@@ -1,0 +1,36 @@
+{
+    "buscarTitularidadSIRSARPResponse": {
+        "respuestaTitularidad": {
+            "respuestaTitularidad": [
+                {
+                    "registro": "REGISTRO DE BIENES MUEBLES",
+                    "libro": "REGISTRO DE PROPIEDAD VEHICULAR",
+                    "apPaterno": "LOPEZ",
+                    "apMaterno": "TANG",
+                    "nombre": "EVERT ELISEO",
+                    "tipoDocumento": "DNI",
+                    "numeroDocumento": 43829102,
+                    "numeroPartida": 50426751,
+                    "numeroPlaca": "A6D610 ",
+                    "estado": "ACTIVA",
+                    "zona": "ZONA REGISTRAL IX - SEDE LIMA",
+                    "oficina": "LIMA"
+                },
+                {
+                    "registro": "REGISTRO DE BIENES MUEBLES",
+                    "libro": "REGISTRO DE PROPIEDAD VEHICULAR",
+                    "apPaterno": "LOPEZ",
+                    "apMaterno": "TANG",
+                    "nombre": "EVERT ELISEO",
+                    "tipoDocumento": "DNI",
+                    "numeroDocumento": 43829102,
+                    "numeroPartida": 60772814,
+                    "numeroPlaca": "V0B465 ",
+                    "estado": "ACTIVA",
+                    "zona": "ZONA REGISTRAL XII - SEDE AREQUIPA",
+                    "oficina": "AREQUIPA"
+                }
+            ]
+        }
+    }
+}

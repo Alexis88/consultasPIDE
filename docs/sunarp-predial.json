@@ -1,0 +1,34 @@
+{
+    "listarAsientosSIRSARPResponse": {
+        "asientos": {
+            "transaccion": "0701P20076305210000020",
+            "nroTotalPag": 3,
+            "listAsientos": [
+                {
+                    "idImgAsiento": 0,
+                    "numPag": 1,
+                    "tipo": "ASIENTO",
+                    "listPag": {
+                        "nroPagRef": 2,
+                        "pagina": 1
+                    }
+                },
+                {
+                    "idImgAsiento": 0,
+                    "numPag": 2,
+                    "tipo": "ASIENTO",
+                    "listPag": [
+                        {
+                            "nroPagRef": 1,
+                            "pagina": 1
+                        },
+                        {
+                            "nroPagRef": 1,
+                            "pagina": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

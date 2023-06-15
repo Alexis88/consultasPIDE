@@ -1,0 +1,333 @@
+{
+	"ConsultarPrediosPorPersonaPIDEResponse":{
+		"ConsultarPrediosPorPersonaPIDEResult":{
+			"Codigo":1,
+			"Lista":{
+				"ListaPredio":[{
+					"nAreTCo":411.50,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 246-248 Piso 1, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - SOTANO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":160.48,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 252 Piso 1, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - SOTANO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":109.16,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 258-260-262 Piso 1, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":61.20,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Int 101, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - SOTANO DEPOSITO 101",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":71.06,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 201 Piso 2, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 201 Y 202",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":49.98,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 203 Piso 2, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 203 Y 204",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":139.21,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 205 Piso 2, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":93.89,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 206 Piso 2, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 206 Y 207",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":61.50,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 208 Piso 2, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":95.33,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 209 Piso 2, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 209 Y 210",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":84.42,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 211 Piso 2, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":180.00,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 2012 Piso 2, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 212 Y 213",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":71.06,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 301 Piso 3, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 301 Y 302",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":49.98,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 303 Piso 3, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 303 Y 304",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":139.21,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 305 Piso 3, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":93.89,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 306 Piso 3, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 306 Y 307",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":92.25,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 308 Piso 3, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 308 Y 309",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null
+					,"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":360.98,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 310 Piso 3, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 310 Y 311",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":48.02,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 601 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 601 Y 602",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":23.94,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 603 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":25.14,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 604 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":24.66,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 605 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":138.69,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 606 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":63.14,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 607 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":30.75,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 608 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":30.75,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 609 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":30.75,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 610 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":30.75,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 611 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020","vNomProp":null,"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":62.73,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 612 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":89.08,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 613 Piso 6, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":79.38,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 701 Piso 7, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 701 Y 702",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":39.49,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 703 Piso 7, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":109.00,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 704 Piso 7, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":124.64,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 705 Piso 7, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 705 Y 706",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":124.23,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 707 Piso 7, CERCADO DE LIMA - Ref: EDIFICIO PALACIO - OF. 707 708 Y 709",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				},{
+					"nAreTCo":89.08,
+					"nAreTTe":0,
+					"nAreTot":0,
+					"vUbiPred":"JR DE LA UNION N° 264 Of 710 Piso 7, CERCADO DE LIMA - Ref: EDIFICIO PALACIO",
+					"vFecDJ":"18/02/2020",
+					"vNomProp":null,
+					"vApePro":"PRESIDENCIA DEL CONSEJO DE MINISTROS",
+					"vFecLic":null
+				}]
+			},
+			"Mensaje":"Consulta realizada exitosamente."
+		}
+	}
+}

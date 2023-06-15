@@ -1,0 +1,110 @@
+*{
+	font-family: 'Catamaran', sans-serif;
+	transition: all ease .175s;
+	-webkit-transition: all ease .175s;
+	-moz-transition: all ease .175s;
+	-o-transition: all ease .175s;
+}
+
+html, body{
+	width: 100%;
+	height: 100%;
+}
+
+body{
+	margin: 0;
+}
+
+/* Scrollbar */
+body::-webkit-scrollbar{
+    width: 14px;
+}
+
+body > section{
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(300deg, #C6FFDD, #FBD786, #F5F5DC);
+	background-size: 180% 180%;
+	animation-name: fondo;
+	animation-duration: 10s;
+	animation-iteration-count: infinite;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+h1{	
+	text-transform: uppercase;
+	animation: titulo ease 1s;
+}
+
+p{
+	margin: 0 auto;
+	margin-bottom: 1.5rem;
+	font-weight: 600;
+	animation: texto ease 1s;
+}
+
+h1, p{
+	text-align: center;
+	color: #CD5C5C;
+}
+
+@keyframes fondo{
+	0%{
+		background-position: 0% 50%;
+	}
+	
+	50%{
+		background-position: 100% 50%;
+	}
+
+	100%{
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes titulo{
+	from{
+		transform: translateY(-500px);
+	}
+
+	to{
+		transform: translateY(0px);
+	}
+}
+
+@keyframes texto{
+	from{
+		transform: scaleY(0);
+	}
+
+	to{
+		transform: scaleY(1);
+	}
+}
+
+/* Pantalla grande */
+@media all and (min-width: 850px){
+	h1{
+		font-size: 2.5rem;
+	}
+
+	p{
+		width: 50%;
+		font-size: 1.1rem;
+	}
+}
+
+/* Pantalla chica */
+@media all and (max-width: 850px){
+	h1{
+		font-size: 1.75rem;
+	}
+
+	p{
+		width: 85%;
+		font-size: 1rem;
+	}
+}

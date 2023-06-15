@@ -1,0 +1,5 @@
+1. Open command: prompt in administrator mode
+
+2. Enter Command: python -m pip install psutil
+
+3. Upgrade pip if outdated: python -m pip install --upgrade pip
