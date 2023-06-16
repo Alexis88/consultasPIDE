@@ -291,13 +291,13 @@ class ClassHub{
 			'usuario' => $user,
 			'clave' => $pass,
 			'out' => 'json'
-		], $tempData, $user, $pass);
+		], $tempData);
 		
 		//Se devuelve el conjunto final de resultados
 		return $tempData;
 	}
 
-	public static function partidas($url, $data, $tempData, $user, $pass){		
+	public static function partidas($url, $data, $tempData){		
 		$results = self::consumir([
 			'url' => $url,
 			'method' => 'GET',
@@ -306,6 +306,10 @@ class ClassHub{
 
 		//Almacén temporal de datos de las páginas de los asientos
 		$temp = [];
+
+		//Credenciales
+		$user = $data['usuario'];
+		$pass = $data['clave'];
 
 		//Si no se encuentra asientos
 		if (!isset($results['listarAsientosSIRSARPResponse']['asientos'])){
@@ -911,82 +915,107 @@ class ClassHub{
 	}
 
 	//OFICINAS REGISTRALES (SERVICIO DE SUNARP)
-	public static function oficinas(){
-		//LAS OFICINAS REGISTRALES
-		$oficinas = [
-			['zona' => '01', 'oficina' => '01', 'ciudad' => 'Lima'],
-			['zona' => '01', 'oficina' => '02', 'ciudad' => 'Callao'],
-			['zona' => '01', 'oficina' => '03', 'ciudad' => 'Huaral'],
-			['zona' => '01', 'oficina' => '04', 'ciudad' => 'Huacho'],
-			['zona' => '01', 'oficina' => '05', 'ciudad' => 'Cañete'],
-			['zona' => '01', 'oficina' => '06', 'ciudad' => 'Barranca'],
+	public static function oficinas($obj){
+		$results = self::consumir([
+			'url' => 'https://ws5.pide.gob.pe/Rest/APide/Sunarp/WSServicegetOficinas',
+			'method' => 'GET',
+			'data' => [
+				'usuario' => $obj['user'],
+				'clave' => $obj['pass'],
+				'out' => 'json'
+			]
+		]);
+		$state = $results && isset($results['oficina']['oficina']);
 
-			['zona' => '02', 'oficina' => '01', 'ciudad' => 'Huancayo'],
-			['zona' => '02', 'oficina' => '02', 'ciudad' => 'Huánuco'],
-			['zona' => '02', 'oficina' => '04', 'ciudad' => 'Pasco'],
-			['zona' => '02', 'oficina' => '05', 'ciudad' => 'Satipo'],
-			['zona' => '02', 'oficina' => '06', 'ciudad' => 'La Merced'],
-			['zona' => '02', 'oficina' => '07', 'ciudad' => 'Tarma'],
-			['zona' => '02', 'oficina' => '08', 'ciudad' => 'Tingo María'],
-			['zona' => '02', 'oficina' => '09', 'ciudad' => 'Huancavelica'],
+		//SI SE OBTUVO EL LISTADO DE OFICINAS REGISTRALES DEL SERVICIO
+		if ($state){
+			//SE REESTRUCTURA EL LISTADO CON LAS CLAVES DE ZONA, OFICINA Y CIUDAD
+			$oficinas = array_map(function ($oficina){
+				return [
+					'zona' => $oficina['codZona'],
+					'oficina' => $oficina['codOficina'],
+					'ciudad' => $oficina['descripcion']
+				];
+			}, $results['oficina']['oficina']);
+		}
+		//CASO CONTRARIO
+		else{
+			//SE ESTRUCTURA EL LISTADO CON LOS DATOS ADJUNTOS EN EL CONTRATO
+			$oficinas = [
+				['zona' => '01', 'oficina' => '01', 'ciudad' => 'Lima'],
+				['zona' => '01', 'oficina' => '02', 'ciudad' => 'Callao'],
+				['zona' => '01', 'oficina' => '03', 'ciudad' => 'Huaral'],
+				['zona' => '01', 'oficina' => '04', 'ciudad' => 'Huacho'],
+				['zona' => '01', 'oficina' => '05', 'ciudad' => 'Cañete'],
+				['zona' => '01', 'oficina' => '06', 'ciudad' => 'Barranca'],
 
-			['zona' => '03', 'oficina' => '01', 'ciudad' => 'Arequipa'],
-			['zona' => '03', 'oficina' => '02', 'ciudad' => 'Camaná'],
-			['zona' => '03', 'oficina' => '03', 'ciudad' => 'Castilla - Aplao'],
-			['zona' => '03', 'oficina' => '04', 'ciudad' => 'Islay - Mollendo'],
+				['zona' => '02', 'oficina' => '01', 'ciudad' => 'Huancayo'],
+				['zona' => '02', 'oficina' => '02', 'ciudad' => 'Huánuco'],
+				['zona' => '02', 'oficina' => '04', 'ciudad' => 'Pasco'],
+				['zona' => '02', 'oficina' => '05', 'ciudad' => 'Satipo'],
+				['zona' => '02', 'oficina' => '06', 'ciudad' => 'La Merced'],
+				['zona' => '02', 'oficina' => '07', 'ciudad' => 'Tarma'],
+				['zona' => '02', 'oficina' => '08', 'ciudad' => 'Tingo María'],
+				['zona' => '02', 'oficina' => '09', 'ciudad' => 'Huancavelica'],
 
-			['zona' => '04', 'oficina' => '01', 'ciudad' => 'Huaraz'],
-			['zona' => '04', 'oficina' => '02', 'ciudad' => 'Casma'],
-			['zona' => '04', 'oficina' => '03', 'ciudad' => 'Chimbote'],
+				['zona' => '03', 'oficina' => '01', 'ciudad' => 'Arequipa'],
+				['zona' => '03', 'oficina' => '02', 'ciudad' => 'Camaná'],
+				['zona' => '03', 'oficina' => '03', 'ciudad' => 'Castilla - Aplao'],
+				['zona' => '03', 'oficina' => '04', 'ciudad' => 'Islay - Mollendo'],
 
-			['zona' => '05', 'oficina' => '01', 'ciudad' => 'Piura'],
-			['zona' => '05', 'oficina' => '02', 'ciudad' => 'Sullana'],
-			['zona' => '05', 'oficina' => '03', 'ciudad' => 'Tumbes'],
+				['zona' => '04', 'oficina' => '01', 'ciudad' => 'Huaraz'],
+				['zona' => '04', 'oficina' => '02', 'ciudad' => 'Casma'],
+				['zona' => '04', 'oficina' => '03', 'ciudad' => 'Chimbote'],
 
-			['zona' => '06', 'oficina' => '01', 'ciudad' => 'Cusco'],
-			['zona' => '06', 'oficina' => '02', 'ciudad' => 'Abancay'],
-			['zona' => '06', 'oficina' => '03', 'ciudad' => 'Madre de Dios'],
-			['zona' => '06', 'oficina' => '04', 'ciudad' => 'Quillabamba'],
-			['zona' => '06', 'oficina' => '05', 'ciudad' => 'Sicuani'],
-			['zona' => '06', 'oficina' => '06', 'ciudad' => 'Espinar'],
-			['zona' => '06', 'oficina' => '07', 'ciudad' => 'Andahuaylas'],
+				['zona' => '05', 'oficina' => '01', 'ciudad' => 'Piura'],
+				['zona' => '05', 'oficina' => '02', 'ciudad' => 'Sullana'],
+				['zona' => '05', 'oficina' => '03', 'ciudad' => 'Tumbes'],
 
-			['zona' => '07', 'oficina' => '01', 'ciudad' => 'Tacna'],
-			['zona' => '07', 'oficina' => '03', 'ciudad' => 'Ilo'],
-			['zona' => '07', 'oficina' => '03', 'ciudad' => 'Juliaca'],
-			['zona' => '07', 'oficina' => '04', 'ciudad' => 'Moquegua'],
-			['zona' => '07', 'oficina' => '05', 'ciudad' => 'Puno'],
+				['zona' => '06', 'oficina' => '01', 'ciudad' => 'Cusco'],
+				['zona' => '06', 'oficina' => '02', 'ciudad' => 'Abancay'],
+				['zona' => '06', 'oficina' => '03', 'ciudad' => 'Madre de Dios'],
+				['zona' => '06', 'oficina' => '04', 'ciudad' => 'Quillabamba'],
+				['zona' => '06', 'oficina' => '05', 'ciudad' => 'Sicuani'],
+				['zona' => '06', 'oficina' => '06', 'ciudad' => 'Espinar'],
+				['zona' => '06', 'oficina' => '07', 'ciudad' => 'Andahuaylas'],
 
-			['zona' => '08', 'oficina' => '01', 'ciudad' => 'Trujillo'],
-			['zona' => '08', 'oficina' => '02', 'ciudad' => 'Chepén'],
-			['zona' => '08', 'oficina' => '03', 'ciudad' => 'Huamachuco'],
-			['zona' => '08', 'oficina' => '04', 'ciudad' => 'Otuzco'],
-			['zona' => '08', 'oficina' => '05', 'ciudad' => 'San Pedro'],
+				['zona' => '07', 'oficina' => '01', 'ciudad' => 'Tacna'],
+				['zona' => '07', 'oficina' => '03', 'ciudad' => 'Ilo'],
+				['zona' => '07', 'oficina' => '03', 'ciudad' => 'Juliaca'],
+				['zona' => '07', 'oficina' => '04', 'ciudad' => 'Moquegua'],
+				['zona' => '07', 'oficina' => '05', 'ciudad' => 'Puno'],
 
-			['zona' => '09', 'oficina' => '01', 'ciudad' => 'Maynas'],
+				['zona' => '08', 'oficina' => '01', 'ciudad' => 'Trujillo'],
+				['zona' => '08', 'oficina' => '02', 'ciudad' => 'Chepén'],
+				['zona' => '08', 'oficina' => '03', 'ciudad' => 'Huamachuco'],
+				['zona' => '08', 'oficina' => '04', 'ciudad' => 'Otuzco'],
+				['zona' => '08', 'oficina' => '05', 'ciudad' => 'San Pedro'],
 
-			['zona' => '10', 'oficina' => '01', 'ciudad' => 'Ica'],
-			['zona' => '10', 'oficina' => '02', 'ciudad' => 'Chincha'],
-			['zona' => '10', 'oficina' => '03', 'ciudad' => 'Pisco'],
-			['zona' => '10', 'oficina' => '04', 'ciudad' => 'Nazca'],		
+				['zona' => '09', 'oficina' => '01', 'ciudad' => 'Maynas'],
 
-			['zona' => '11', 'oficina' => '01', 'ciudad' => 'Chiclayo'],
-			['zona' => '11', 'oficina' => '02', 'ciudad' => 'Cajamarca'],
-			['zona' => '11', 'oficina' => '03', 'ciudad' => 'Jaén'],
-			['zona' => '11', 'oficina' => '04', 'ciudad' => 'Bagua'],
-			['zona' => '11', 'oficina' => '05', 'ciudad' => 'Chachapoyas'],
-			['zona' => '11', 'oficina' => '06', 'ciudad' => 'Chota'],
+				['zona' => '10', 'oficina' => '01', 'ciudad' => 'Ica'],
+				['zona' => '10', 'oficina' => '02', 'ciudad' => 'Chincha'],
+				['zona' => '10', 'oficina' => '03', 'ciudad' => 'Pisco'],
+				['zona' => '10', 'oficina' => '04', 'ciudad' => 'Nazca'],		
 
-			['zona' => '12', 'oficina' => '01', 'ciudad' => 'Moyobamba'],
-			['zona' => '12', 'oficina' => '02', 'ciudad' => 'Tarapoto'],
-			['zona' => '12', 'oficina' => '03', 'ciudad' => 'Juanjui'],
-			['zona' => '12', 'oficina' => '04', 'ciudad' => 'Yurimaguas'],
+				['zona' => '11', 'oficina' => '01', 'ciudad' => 'Chiclayo'],
+				['zona' => '11', 'oficina' => '02', 'ciudad' => 'Cajamarca'],
+				['zona' => '11', 'oficina' => '03', 'ciudad' => 'Jaén'],
+				['zona' => '11', 'oficina' => '04', 'ciudad' => 'Bagua'],
+				['zona' => '11', 'oficina' => '05', 'ciudad' => 'Chachapoyas'],
+				['zona' => '11', 'oficina' => '06', 'ciudad' => 'Chota'],
 
-			['zona' => '13', 'oficina' => '01', 'ciudad' => 'Pucallpa'],
+				['zona' => '12', 'oficina' => '01', 'ciudad' => 'Moyobamba'],
+				['zona' => '12', 'oficina' => '02', 'ciudad' => 'Tarapoto'],
+				['zona' => '12', 'oficina' => '03', 'ciudad' => 'Juanjui'],
+				['zona' => '12', 'oficina' => '04', 'ciudad' => 'Yurimaguas'],
 
-			['zona' => '14', 'oficina' => '01', 'ciudad' => 'Ayacucho'],
-			['zona' => '14', 'oficina' => '02', 'ciudad' => 'Huanta']
-		];		
+				['zona' => '13', 'oficina' => '01', 'ciudad' => 'Pucallpa'],
+
+				['zona' => '14', 'oficina' => '01', 'ciudad' => 'Ayacucho'],
+				['zona' => '14', 'oficina' => '02', 'ciudad' => 'Huanta']
+			];
+		}	
 
 		//SE ORDENAN LAS OFICINAS
 		usort($oficinas, [self::class, 'sortOffices']);
