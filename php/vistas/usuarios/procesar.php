@@ -338,7 +338,7 @@ if ($query){
 
 	echo json_encode([
 		'estado' => 'ok',
-		'mensaje' => $tipo < 2 ? "El nombre de usuario y clave es <b>{$usu_username}</b>" : 'Operación exitosa',
+		'mensaje' => $tipo < 2 ? "<span>El nombre de usuario y clave es <b>$usu_username</b></span>" : 'Operación exitosa',
 		'tiempo' => $tipo < 2 ? 10000 : 5000
 	]);
 
