@@ -8,7 +8,7 @@ extract($_GET);
 
 ClassHub::stopServiceLoad('sunarp');
 $data = ClassHub::userServiceData(ClassHub::myID(), $id);
-$oficinas = ClassHub::oficinas($data);
+$oficinas = ClassHub::oficinas();
 $tipos = ClassHub::tiposPartida();
 ?>
 <!DOCTYPE html>
