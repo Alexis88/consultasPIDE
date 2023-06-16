@@ -60,6 +60,12 @@ h4, h5{
 	padding: 2px 3.5px;
 }
 
+/* Campo requerido */
+.required{
+	border-bottom: 2px #DC143C solid !important;
+	animation: showRequired 3s linear;
+}
+
 /* Animación que muestra los cuadros de servicios */
 @keyframes showServices{
 	from{
@@ -68,6 +74,29 @@ h4, h5{
 
 	to{
 		transform: scale(1);
+	}
+}
+
+/* Animación para los campos requeridos */
+@keyframes showRequired{
+	0%{
+		transform: scaleX(1);
+	}
+
+	25%{
+		transform: scaleX(0);
+	}
+
+	50%{
+		transform: scaleX(1);
+	}
+
+	75%{
+		transform: scaleX(0);
+	}
+
+	100%{
+		transform: scaleX(1);
 	}
 }
 

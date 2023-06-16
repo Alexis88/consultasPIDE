@@ -6,6 +6,7 @@ form{
 
 /* Formulario de registro y edición */
 #data{
+	width: 85%;
 	border-radius: .5rem;
 	padding: 1% 0;
 	margin-bottom: 2.5%;
@@ -98,10 +99,6 @@ form{
 
 /* Pantalla grande */
 @media all and (min-width: 850px){
-	#data{
-		width: 85%;
-	}
-
 	#data input:not([type=submit]), #data select, #data label, #data textarea{
 		width: 40%;
 		font-size: 1rem;
@@ -110,10 +107,6 @@ form{
 
 /* Pantalla chica */
 @media all and (max-width: 850px){
-	#data{
-		width: 85%;
-	}	
-
 	#data input:not([type=submit]), #data select, #data label, #data textarea{
 		width: 85%;
 		font-size: .9rem;

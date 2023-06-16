@@ -8,11 +8,11 @@ let Usuarios = {
 			//AUTOCOMPLETADO DE DATOS
 			if (elem.classList.contains("autocomplete")){
 				Autocomplete.go({
-					source: elem.dataset.url + ".php",
+					source: `${elem.dataset.url}.php`,
 					input: elem,
-					extraData: "field=" + elem.dataset.field + "&table=" + elem.dataset.table,
+					extraData: `field=${elem.dataset.field}&table=${elem.dataset.table}`,
 					show: "data",
-					hideScroll: "[id^=modalFront] > div",
+					hideScroll: "[id^=modalFront]",
 					select: data => {
 						if (elem.nextElementSibling.type == "hidden"){
 							elem.nextElementSibling.value = data.id;

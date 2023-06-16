@@ -77,6 +77,9 @@ let Servicios = {
 						return false;
 					}
 
+					const sunarp = document.querySelector("#busquedaSUNARP");
+					sunarp && sunarp.value < 4 && Notification.msg("Por favor, sea paciente");
+
 					//SE CONSUME EL SERVICIO
 					elem.dataset?.rest in Servicios && Servicios[elem.dataset.rest](Servicios.getParams(Base.getParent(elem, "form")));
 
@@ -585,7 +588,14 @@ let Servicios = {
 	check: function(){
 		for (let i = 0, f = this.elements, l = f.length; i < l; i++){
 			if (f[i].required && !f[i].value.length){
-				Notification.msg("⚠️ Tiene que completar todos los campos requeridos");
+				f[i].classList.add("required");
+				Notification.msg({
+					text: "⚠️ Tiene que completar todos los campos requeridos",
+					onHide: _ => {
+						f[i].classList.remove("required");
+						f[i].focus();
+					}
+				});
 				return false;
 			}
 
@@ -594,15 +604,29 @@ let Servicios = {
 					fieldName = f[i].name.substr(underscorePos > -1 ? underscorePos + 1 : 0),
 					minLength = f[i].minLength;
 
-
-				Notification.msg(`⚠️ El texto del campo ${fieldName} no puede ser menor a ${minLength} caracteres`);
+				f[i].classList.add("required");
+				Notification.msg({
+					text: `⚠️ El texto del campo señalado no puede ser menor a ${minLength} caracteres`,
+					onHide: _ => {
+						f[i].classList.remove("required");
+						f[i].focus();
+					}
+				});
 				return false;
 			}
 
 			if (f[i].required && "maxLength" in f[i] && f[i].maxLength > 0 && f[i].value.length > f[i].maxLength){
 				let fieldName = f[i].name.substr(f[i].name.indexOf("_") ? f[i].name.indexOf("_") + 1 : 0),
 					maxLength = f[i].maxLength;
-				Notification.msg(`⚠️ El texto del campo ${fieldName} no puede ser mayor a ${maxLength} caracteres`);
+
+				f[i].classList.add("required");
+				Notification.msg({
+					text: `⚠️ El texto del campo señalado no puede ser mayor a ${maxLength} caracteres`,
+					onHide: _ => {
+						f[i].classList.remove("required");
+						f[i].focus();
+					}
+				});
 				return false;
 			}
 		}
@@ -962,7 +986,7 @@ let Servicios = {
 
 					//SE RECORRE EL CONJUNTO DE IMÁGENES DE LA PARTIDA DE LA ITERACIÓN ACTUAL
 					if (dominio["img"].length){
-						partidas = `<span class="verPartida" title="Ver partida registral" style="display: inline-block;" data-partida="nropartida=${params.nropartida}&img[]=${dominio['img'].join('&img[]=')}">Ver partida</span>`;
+						partidas = `<span class="verPartida" title="Ver partida registral" style="display: inline-block;" data-partida="nropartida=${dominio["partida"]}&img[]=${dominio['img'].join('&img[]=')}">Ver partida</span>`;
 					}
 
 					//SE GENERA EL CONJUNTO DE DATOS A MOSTRAR

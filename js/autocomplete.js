@@ -58,12 +58,12 @@ let Autocomplete = {
             fetch(Autocomplete.options.source + "?" + new URLSearchParams({
                 term: Autocomplete.options.input.value
             }) + (Autocomplete.options.extraData ? "&" + Autocomplete.options.extraData : ""))
-                .then((data) => data.json())
-                .then((response) => {
+                .then(data => data.json())
+                .then(response => {
                     if (response.length) Autocomplete.list(response);
                     else Autocomplete.remove();
                 })
-                .catch((error) => console.log(error.message));              
+                .catch(error => console.log(error));              
         }
     },
 
@@ -238,13 +238,15 @@ let Autocomplete = {
     },
 
     resize: _ => {
-        Autocomplete.container.style.width = Autocomplete.options.input.offsetWidth + "px";
-        Autocomplete.container.style.top = (Autocomplete.options.input.offsetTop + Autocomplete.options.input.offsetHeight - (Autocomplete.options.hideScroll ? document.querySelector(Autocomplete.options.hideScroll).scrollTop : 0)) + "px";
-        Autocomplete.container.style.left = Autocomplete.options.input.offsetLeft + "px";
-        Autocomplete.container.style.maxHeight = window.innerHeight * .3 + "px";
+        const rect = Autocomplete.options.input.getBoundingClientRect();
+
+        Autocomplete.container.style.width = `${rect.width}px`;
+        Autocomplete.container.style.top = `${rect.bottom}px`;
+        Autocomplete.container.style.left = `${rect.left}px`;
+        Autocomplete.container.style.maxHeight = `${window.innerHeight * .3}px`;
         Autocomplete.container.style.overflowY = "auto";
 
-        [...Autocomplete.container.querySelectorAll("b")].forEach(b => b.style.width = Autocomplete.options.input.offsetWidth + "px");
+        [...Autocomplete.container.querySelectorAll("b")].forEach(b => b.style.width = `${rect.width}px`);
     },
 
     over: event => {
