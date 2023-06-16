@@ -148,7 +148,7 @@ switch ($busquedaSUNARP){
 		];
 
 		//Se buscan las partidas registrales
-		$results = ClassHub::partidas($url, $data, [], $user, $pass);
+		$results = ClassHub::partidas($url, $data, []);
 
 		//Se evalúa si se obtuvo resultados de la búsqueda por n° de partida y oficina registral
 		if ($results){

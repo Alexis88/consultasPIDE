@@ -22,7 +22,7 @@ $accion = "El usuario <b>$myName</b>, identificado con n° de DNI <b>$myDNI</b>,
 if ($query){
 	echo json_encode([
 		'estado' => 'ok',
-		'mensaje' => 'Operación exitosa'
+		'mensaje' => '✔️ Operación exitosa'
 	]);
 
 	//Registro de control	
@@ -31,7 +31,7 @@ if ($query){
 else{
 	echo json_encode([
 		'estado' => 'ok',
-		'mensaje' => 'Operación errónea'
+		'mensaje' => '❌ Operación errónea'
 	]);
 }
 ?>

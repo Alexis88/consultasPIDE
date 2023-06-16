@@ -12,7 +12,7 @@ if ($tipo < 3){
 	if (!ClassHub::validate($niv_nombre, 'string', 3, 20)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'El formato del nombre del nivel no es válido'
+			'mensaje' => '⚠️ El formato del nombre del nivel no es válido'
 		]);
 		exit;
 	}
@@ -20,7 +20,7 @@ if ($tipo < 3){
 	if (ClassHub::duplicatedLevel($niv_nombre, $tipo == 2 ? $id : false)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => "Ya existe el nivel $niv_nombre. Escriba otro."
+			'mensaje' => "⚠️ Ya existe el nivel <b>$niv_nombre</b>. Escriba otro."
 		]);
 		exit;
 	}
@@ -99,7 +99,7 @@ switch ($tipo){
 if ($query){
 	echo json_encode([
 		'estado' => 'ok',
-		'mensaje' => 'Operación exitosa'
+		'mensaje' => '✔️ Operación exitosa'
 	]);
 
 	//Registro de control	
@@ -108,7 +108,7 @@ if ($query){
 else{
 	echo json_encode([
 		'estado' => 'ok',
-		'mensaje' => 'Operación errónea'
+		'mensaje' => '❌ Operación errónea'
 	]);
 }
 ?>

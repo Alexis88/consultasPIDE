@@ -18,7 +18,7 @@ if ($result->num_rows){
 	if ($data['estado'] == 2){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'Su cuenta se encuentra deshabilitada'
+			'mensaje' => '🚫 Su cuenta se encuentra deshabilitada'
 		]);
 		exit;
 	}
@@ -27,7 +27,7 @@ if ($result->num_rows){
 	if (!password_verify(mb_strtoupper($pass), $data['password'])){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'La contraseña ingresada no es correcta'
+			'mensaje' => '⚠️ La contraseña ingresada no es correcta'
 		]);
 		exit;
 	}
@@ -82,7 +82,7 @@ if ($result->num_rows){
 else{
 	echo json_encode([
 		'estado' => 'error',
-		'mensaje' => 'Ha ocurrido un error'
+		'mensaje' => '⚠️ Ha ocurrido un error. Por favor, consulte con soporte técnico.'
 	]);
 }
 ?>

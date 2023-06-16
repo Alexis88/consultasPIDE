@@ -17,7 +17,7 @@ echo json_encode(
 	] : 
 	[
 		'estado' => 'error',
-		'mensaje' => 'Ha ocurrido un problema al intentar cerrar la sesión. Se le redirigirá al formulario de identificación.',
+		'mensaje' => '⚠️ Ha ocurrido un problema al intentar cerrar la sesión. Se le redirigirá al formulario de identificación.',
 		'url' => '\apppide'
 	]
 );

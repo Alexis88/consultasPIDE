@@ -12,7 +12,7 @@ if ($tipo < 3){
 	if (($tipo < 2 && ClassHub::duplicatedDNI($usu_dni)) || ($tipo == 2 && ClassHub::duplicatedDNI($usu_dni, $id))){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => "El número de DNI <b>$usu_dni</b> ya se encuentra registrado. Ingrese otro."
+			'mensaje' => "⚠️ El número de DNI <b>$usu_dni</b> ya se encuentra registrado. Ingrese otro."
 		]);
 		exit;
 	}
@@ -20,7 +20,7 @@ if ($tipo < 3){
 	if (!ClassHub::validate($usu_apellidopat, 'string', 2, 30)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'El formato del apellido paterno del usuario no es válido'
+			'mensaje' => '⚠️ El formato del apellido paterno del usuario no es válido'
 		]);
 		exit;
 	}
@@ -28,7 +28,7 @@ if ($tipo < 3){
 	if (!ClassHub::validate($usu_apellidomat, 'string', 2, 30)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'El formato del apellido materno del usuario no es válido'
+			'mensaje' => '⚠️ El formato del apellido materno del usuario no es válido'
 		]);
 		exit;
 	}
@@ -36,7 +36,7 @@ if ($tipo < 3){
 	if (!ClassHub::validate($usu_nombres, 'string', 2, 30)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'El formato del nombre del usuario no es válido'
+			'mensaje' => '⚠️ El formato del nombre del usuario no es válido'
 		]);
 		exit;
 	}
@@ -44,7 +44,7 @@ if ($tipo < 3){
 	if (!ClassHub::validate($usu_dni, 'string', 8, 8)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'El formato del DNI del usuario no es válido'
+			'mensaje' => '⚠️ El formato del DNI del usuario no es válido'
 		]);
 		exit;
 	}
@@ -52,7 +52,7 @@ if ($tipo < 3){
 	if (!ClassHub::validate($usu_email, 'email', 7, 100)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'El formato del correo electrónico del usuario no es válido'
+			'mensaje' => '⚠️ El formato del correo electrónico del usuario no es válido'
 		]);
 		exit;
 	}
@@ -60,7 +60,7 @@ if ($tipo < 3){
 	if (!ClassHub::validate($usu_area, 'string', 3, 100)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'El formato del área del usuario no es válido'
+			'mensaje' => '⚠️ El formato del área del usuario no es válido'
 		]);
 		exit;
 	}
@@ -68,7 +68,7 @@ if ($tipo < 3){
 	if (!ClassHub::validate($usu_cargo, 'string', 3, 25)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'El formato del cargo del usuario no es válido'
+			'mensaje' => '⚠️ El formato del cargo del usuario no es válido'
 		]);
 		exit;
 	}
@@ -76,7 +76,7 @@ if ($tipo < 3){
 	if (ClassHub::checkService($servicio)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'No puede ingresar más datos para un mismo servicio'
+			'mensaje' => '⚠️ No puede ingresar más datos para un mismo servicio'
 		]);
 		exit;
 	}
@@ -94,7 +94,7 @@ if ($tipo < 3){
 			if ($usernameLength > 50){
 				echo json_encode([
 					'estado' => 'error',
-					'mensaje' => "El nombre de usuario {$user[$i]} no puede pasar los 50 caracteres."
+					'mensaje' => "⚠️ El nombre de usuario {$user[$i]} no puede pasar los 50 caracteres."
 				]);
 				exit;
 			}
@@ -103,7 +103,7 @@ if ($tipo < 3){
 			if (!$usernameLength && $passwordLength){
 				echo json_encode([
 					'estado' => 'error',
-					'mensaje' => "Tiene que ingresar un nombre de usuario para usar el servicio <b>$service</b>."
+					'mensaje' => "⚠️ Tiene que ingresar un nombre de usuario para usar el servicio <b>$service</b>."
 				]);
 				exit;
 			}
@@ -111,7 +111,7 @@ if ($tipo < 3){
 			else if ($usernameLength && !$passwordLength){
 				echo json_encode([
 					'estado' => 'error',
-					'mensaje' => "Tiene que ingresar una clave de acceso para usar el servicio <b>$service</b>."
+					'mensaje' => "⚠️ Tiene que ingresar una clave de acceso para usar el servicio <b>$service</b>."
 				]);
 				exit;
 			}
@@ -119,7 +119,7 @@ if ($tipo < 3){
 			else if (!$usernameLength && !$passwordLength){
 				echo json_encode([
 					'estado' => 'error',
-					'mensaje' => "Tiene que ingresar un nombre de usuario y clave de acceso para usar el servicio <b>$service</b>."
+					'mensaje' => "⚠️ Tiene que ingresar un nombre de usuario y clave de acceso para usar el servicio <b>$service</b>."
 				]);
 				exit;
 			}
@@ -338,8 +338,8 @@ if ($query){
 
 	echo json_encode([
 		'estado' => 'ok',
-		'mensaje' => $tipo < 2 ? "<span>El nombre de usuario y clave es <b>$usu_username</b></span>" : 'Operación exitosa',
-		'tiempo' => $tipo < 2 ? 10000 : 5000
+		'mensaje' => $tipo < 2 ? "<span><img src='../../../img/info.ico' class='notificationImg' /> El nombre de usuario y clave de acceso es <b>$usu_username</b></span>" : '✔️ Operación exitosa',
+		'tiempo' => $tipo < 2 ? 15000 : 5000
 	]);
 
 	//Registro de control	
@@ -348,7 +348,7 @@ if ($query){
 else{
 	echo json_encode([
 		'estado' => 'ok',
-		'mensaje' => 'Operación errónea'
+		'mensaje' => '❌ Operación errónea'
 	]);
 }
 ?>

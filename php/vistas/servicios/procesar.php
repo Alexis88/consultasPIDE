@@ -13,7 +13,7 @@ if ($tipo < 3){
 	if (ClassHub::duplicatedService($ser_nombre, $ser_etiqueta, isset($id) ? $id : false)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'Este servicio ya se encuentra registrado y no puede ser duplicado'
+			'mensaje' => '⚠️ Este servicio ya se encuentra registrado y no puede ser duplicado'
 		]);
 		exit;
 	}
@@ -21,7 +21,7 @@ if ($tipo < 3){
 	if (!ClassHub::validate($ser_nombre, 'string', 3, 50)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'El formato del nombre clave del servicio no es válido'
+			'mensaje' => '⚠️ El formato del nombre clave del servicio no es válido'
 		]);
 		exit;
 	}
@@ -29,7 +29,7 @@ if ($tipo < 3){
 	if (!ClassHub::validate($ser_etiqueta, 'string', 3, 50)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'El formato del nombre público del servicio no es válido'
+			'mensaje' => '⚠️ El formato del nombre público del servicio no es válido'
 		]);
 		exit;
 	}
@@ -37,7 +37,7 @@ if ($tipo < 3){
 	if (!ClassHub::validate($ser_descripcion, 'string', 10, 150)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'Tiene que ingresar una descripción del servicio no menor a 10 caracteres ni mayor a 150'
+			'mensaje' => '⚠️ Tiene que ingresar una descripción del servicio no menor a 10 caracteres ni mayor a 150'
 		]);
 		exit;
 	}
@@ -45,7 +45,7 @@ if ($tipo < 3){
 	if (($ser_login < 2 && $ser_update < 2) && (!ClassHub::validate($ser_updatetime, 'number', 1, 3) || $ser_updatetime < 1)){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'Tiene que ingresar un valor numérico válido, mayor a cero, de entre 1 y 3 dígitos de extensión, para especificar el tiempo, dado en días, entre las actualizaciones de credenciales del servicio'
+			'mensaje' => '⚠️ Tiene que ingresar un valor numérico válido, mayor a cero, de entre 1 y 3 dígitos de extensión, para especificar el tiempo, dado en días, entre las actualizaciones de credenciales del servicio'
 		]);
 		exit;
 	}
@@ -53,7 +53,7 @@ if ($tipo < 3){
 	if ($ser_login < 2 && $ser_generalLogin < 2 && (!ClassHub::validate($gen_user, 'string', 3, 50) || !ClassHub::validate($gen_pass, 'all', 3, 50))){
 		echo json_encode([
 			'estado' => 'error',
-			'mensaje' => 'Tiene que ingresar un nombre de usuario y contraseña, cada uno de entre 3 y 50 caracteres de extensión'
+			'mensaje' => '⚠️ Tiene que ingresar un nombre de usuario y contraseña, cada uno de entre 3 y 50 caracteres de extensión'
 		]);
 		exit;
 	}
@@ -252,7 +252,7 @@ if ($query){
 
 	echo json_encode([
 		'estado' => 'ok',
-		'mensaje' => 'Operación exitosa'
+		'mensaje' => '✔️ Operación exitosa'
 	]);
 
 	//Registro de control	
@@ -261,7 +261,7 @@ if ($query){
 else{
 	echo json_encode([
 		'estado' => 'ok',
-		'mensaje' => 'Operación errónea'
+		'mensaje' => '❌ Operación errónea'
 	]);
 }
 ?>
