@@ -106,6 +106,7 @@ var Files = {
 				//Previsualizar archivo si es de un tipo admitido
 				if (Files.mimes.indexOf(files[0].type) > -1){
 					preview.classList.replace("hide", "show");
+					preview.classList.add("modalMedia");
 					preview.src = event.target.result;
 					preview.title = "Logo del servicio";
 					btn.dataset.logo = "temp";
