@@ -66,11 +66,11 @@ class ClassHub{
 		return $data;
 	}
 
-	public static function getServiceByName($serviceName){
+	public static function getServiceByName($options){
 		$results = Consultas::select([
-			'fields' => 'b.gen_user AS user, b.gen_pass AS pass',
+			'fields' => $options['fields'],
 			'table' => 'tbl_servicios a LEFT JOIN tbl_generalLogin b ON b.fk_ser_gen = a.ser_id',
-			'conditions' => "WHERE a.ser_nombre = '$serviceName'"
+			'conditions' => "WHERE a.ser_nombre = '{$options['name']}'"
 		]);
 
 		return $results->num_rows ? $results->fetch_assoc() : false;
@@ -926,7 +926,10 @@ class ClassHub{
 
 	//OFICINAS REGISTRALES (SERVICIO DE SUNARP)
 	public static function oficinas(){
-		$data = self::getServiceByName('SUNARP');
+		$data = self::getServiceByName([
+			'fields' => 'b.gen_user AS user, b.gen_pass AS pass',
+			'name' => 'SUNARP'
+		]);
 
 		if (!$data){
 			echo json_encode([
