@@ -412,7 +412,7 @@ let Servicios = {
 					 * Sus elementos <input>, <select> y <textarea> no serán de llenado obligatorio
 					 */
 					document.querySelectorAll(clase).forEach(el => el.classList[i == value ? "remove" : "add"]("hide"));
-					document.querySelectorAll(`${clase}:has(input, select, textarea)`).forEach(child => child.required = i == value);
+					document.querySelectorAll(`${clase} :is(input, select, textarea)`).forEach(child => child.required = i == value);
 				});
 
 				//Se le da el enfoque a la primera caja de texto disponible
@@ -731,7 +731,7 @@ let Servicios = {
 	getParams: form => {
 		const data = {};
 
-		form.elements.forEach(elem => {
+		[...form.elements].forEach(elem => {
 			if (elem.hasAttribute("data-rest") && elem.name.length){
 				data[elem.name] = elem.value;
 			}
