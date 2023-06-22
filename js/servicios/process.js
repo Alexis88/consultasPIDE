@@ -236,29 +236,31 @@ let Servicios = {
 			const 
 				elem = e.target,
 				names = ["ser_login", "ser_update", "ser_generalLogin"];
-			let timeSelect;
+			let timeSelect, timeSelectParent,
+				timeInput, timeParent,
+				credentialsSelect, credentialsParent, credentialsInputsParents;
 
 			//SI EL ELEMENTO ES EL COMBO DE REQUERIMIENTO DE CREDENCIALES O DE ACTUALIZACIÓN DE CREDENCIALES
 			if (names.indexOf(elem.id) > -1){
 				//SE REGISTRAN LAS VARIABLES QUE CONTIENEN LAS REFERENCIAS A LOS ELEMENTOS NECESARIOS
 
 				//COMBO DE ACTUALIZACIÓN DE CREDENCIALES
-				timeSelect = document.querySelector("#ser_update"),
+				timeSelect = document.querySelector("#ser_update");
 
 				//SECCIÓN DEL COMBO DE ACTUALIZACIÓN DE CREDENCIALES
-				timeSelectParent = Base.getParent(timeSelect, "section"),
+				timeSelectParent = Base.getParent(timeSelect, "section");
 
 				//CAMPO DEL TIEMPO DE ACTUALIZACIÓN DE CREDENCIALES
-				timeInput = document.querySelector("#ser_updatetime"),
+				timeInput = document.querySelector("#ser_updatetime");
 
 				//SECCIÓN DEL CAMPO DEL TIEMPO DE ACTUALIZACIÓN DE CREDENCIALES
-				timeParent = Base.getParent(timeInput, "section"),
+				timeParent = Base.getParent(timeInput, "section");
 
 				//COMBO DE CREDENCIALES GENERALES
-				credentialsSelect = document.querySelector("#ser_generalLogin"),
+				credentialsSelect = document.querySelector("#ser_generalLogin");
 
 				//SECCIÓN DEL COMBO DE CREDENCIALES GENERALES
-				credentialsParent = Base.getParent(credentialsSelect, "section"),
+				credentialsParent = Base.getParent(credentialsSelect, "section");
 
 				//SECCIONES DE LOS CAMPOS DE LAS CREDENCIALES GENERALES
 				credentialsInputsParents = document.querySelectorAll(".generalLogin");
@@ -403,16 +405,14 @@ let Servicios = {
 					value = elem.value - 1;
 
 				clases.forEach((clase, i) => {
-					//Se mostrarán los bloques que correspondan con la opción elegida y sus elementos serán de llenado obligatorio
-					if (i == value){
-						document.querySelectorAll(clase).forEach(el => el.classList.remove("hide"));
-						document.querySelectorAll(`${clase}:has(input, select, textarea)`).forEach(child => child.required = true);
-					}
-					//Los bloques restantes se ocultarán y sus elementos no serán de llenado obligatorio
-					else{
-						document.querySelectorAll(clase).forEach(el => el.classList.add("hide"));
-						document.querySelectorAll(`${clase}:has(input, select, textarea)`).forEach(child => child.required = false);
-					}
+					/**
+					 * Se muestran los bloques que correspondan con la opción seleccionada
+					 * Sus elementos <input>, <select> y <textarea> serán de llenado obligatorio
+					 * Se ocultan los bloques que no correspondan con la opción seleccionada
+					 * Sus elementos <input>, <select> y <textarea> no serán de llenado obligatorio
+					 */
+					document.querySelectorAll(clase).forEach(el => el.classList[i == value ? "remove" : "add"]("hide"));
+					document.querySelectorAll(`${clase}:has(input, select, textarea)`).forEach(child => child.required = i == value);
 				});
 
 				//Se le da el enfoque a la primera caja de texto disponible
