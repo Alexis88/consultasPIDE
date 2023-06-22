@@ -79,7 +79,7 @@ const Modal = {
 		}
 
 		Modal.queue ??= [];
-		Modal.createModal();
+		return Modal.createModal();
 	},
 
 	type(elem, type){
@@ -147,6 +147,8 @@ const Modal = {
 				Modal.resize();
 			}, 400);
 		});		
+
+		return cloneConfig;
 	},
 
 	createBack(){
@@ -359,7 +361,7 @@ const Modal = {
 	},
 
 	hide(config){
-		var queue, index, back, front;
+		let queue, index, back, front;
 
 		//Cuando se oculta la ventana modal pulsando la tecla ESC
 		if (!config){
@@ -397,7 +399,7 @@ const Modal = {
 	},
 
 	hideAll(){
-		[...document.querySelectorAll("[id^=modalBack-]")].forEach(back => {
+		document.querySelectorAll("[id^=modalBack-]").forEach(back => {
 			const front = back.querySelector("[id^=modalFront-]");
 
 			back.animate([

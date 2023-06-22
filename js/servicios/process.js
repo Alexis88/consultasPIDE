@@ -26,27 +26,28 @@ let Servicios = {
 		Servicios.form = document.querySelector("#search");
 
 		//SE MUESTRAN LOS BLOQUES DE LOS SERVICIOS
-		Servicios.loadServices();
+		Servicios.loadServices();		
 
+		//CONTROL DE EVENTOS
+		Servicios.events();
+	},
+
+	events: _ => {
 		//CUANDO SE REALICE UNA BÚSQUEDA
 		Servicios.form.addEventListener("change", e => e.target.tagName == "SELECT" && Servicios.loadServices(), false);
-
 		Servicios.form.addEventListener("input", e => e.target.tagName == "INPUT" && Servicios.loadServices(), false);
 
 		//CONTROL DEL ENVÍO DE DATOS DEL FORMULARIO DE EDICIÓN DE SERVICIOS
 		document.addEventListener("submit", e => {
 			e.preventDefault();
-
-			let elem = e.target;			
-
-			if (elem.classList.contains("mantenimiento") && Servicios.check.call(elem)){
-				Servicios.save(elem);
-			}
+			const elem = e.target;
+			elem.classList.contains("mantenimiento") && Servicios.check.call(elem) && Servicios.save(elem);
 		}, false);
 
 		//CONTROL DE CLICS
 		document.addEventListener("click", e => {
-			let elem = e.target, tipo, parent = Base.getParent(elem, "servicio");
+			const elem = e.target, parent = Base.getParent(elem, "servicio");
+			let tipo;
 
 			//SI SE PULSA EL BOTÓN DE ELIMINACIÓN DEL LOGO
 			if (elem.classList.contains("del") && elem.dataset.logo.length && elem.parentNode.querySelector(".preview")){
@@ -73,18 +74,16 @@ let Servicios = {
 
 				//SI HAY CONEXIÓN A INTERNET
 				if (navigator.onLine){
+					//SI NO SE HAN LLENADO LOS CAMPOS OBLIGATORIOS, SE CANCELA LA PETICIÓN
 					if (!Servicios.check.call(Base.getParent(elem, "form"))){
 						return false;
 					}
 
-					const sunarp = document.querySelector("#busquedaSUNARP");
-					sunarp && sunarp.value < 4 && Notification.msg("Por favor, sea paciente");
+					//SI SE ESTÁ REALIZANDO UNA BÚSQUEDA DE PARTIDAS REGISTRALES (SERVICIO DE SUNARP), SE LE PIDE AL USUARIO QUE SEA PACIENTE
+					document.querySelector("#busquedaSUNARP")?.value < 4 && Notification.msg("Por favor, sea paciente");
 
-					//SE CONSUME EL SERVICIO
+					//SI EL SERVICIO ASOCIADO AL BOTÓN DE BÚSQUEDA EXISTE, SE CONSUME
 					elem.dataset?.rest in Servicios && Servicios[elem.dataset.rest](Servicios.getParams(Base.getParent(elem, "form")));
-
-					//SE REDIMENSIONA LA VENTANA MODAL
-					Modal.resize();
 				}
 				//CASO CONTRARIO
 				else{
@@ -121,7 +120,7 @@ let Servicios = {
 					onError: response => Base.sessionClosed(response),
 					onShow: _ => {
 						//SE LE DA EL ENFOQUE A LA PRIMERA CAJA DE TEXTO DEL FORMULARIO DEL SERVICIO
-						let input = document.querySelector("[id^=modalFront] input");
+						const input = document.querySelector("[id^=modalFront] input");
 						input && document.activeElement?.tagName != "INPUT" && input.focus();
 
 						//Se aplica el tema establecido
@@ -146,7 +145,6 @@ let Servicios = {
 				const 
 					form = document.createElement("form"),
 					data = elem.dataset.partida.split("&");
-
 				let input, splitPair;
 
 				form.action = `sunarp/partidas.php?timestamp=${new Date().getTime()}`;
@@ -235,14 +233,17 @@ let Servicios = {
 
 		//CONTROL DE CAMBIOS
 		document.addEventListener("change", e => {
-			let elem = e.target;
+			const 
+				elem = e.target,
+				names = ["ser_login", "ser_update", "ser_generalLogin"];
+			let timeSelect;
 
 			//SI EL ELEMENTO ES EL COMBO DE REQUERIMIENTO DE CREDENCIALES O DE ACTUALIZACIÓN DE CREDENCIALES
-			if (["ser_login", "ser_update", "ser_generalLogin"].indexOf(elem.id) > -1){
+			if (names.indexOf(elem.id) > -1){
 				//SE REGISTRAN LAS VARIABLES QUE CONTIENEN LAS REFERENCIAS A LOS ELEMENTOS NECESARIOS
 
 				//COMBO DE ACTUALIZACIÓN DE CREDENCIALES
-				var timeSelect = document.querySelector("#ser_update"),
+				timeSelect = document.querySelector("#ser_update"),
 
 				//SECCIÓN DEL COMBO DE ACTUALIZACIÓN DE CREDENCIALES
 				timeSelectParent = Base.getParent(timeSelect, "section"),
@@ -290,7 +291,7 @@ let Servicios = {
 						timeInput.required = false;
 					}
 
-					[...credentialsInputsParents].forEach(section => {
+					credentialsInputsParents.forEach(section => {
 						//SI EL VALOR DEL COMBO DE CREDENCIALES GENERALES ES "SÍ"
 						if (credentialsSelect.value < 2){
 							//SE MUESTRAN LOS CAMPOS DE LAS CREDENCIALES GENERALES
@@ -323,7 +324,7 @@ let Servicios = {
 					//Y DEJA DE SER OBLIGATORIO
 					timeInput.required = false;
 
-					[...credentialsInputsParents].forEach(section => {
+					credentialsInputsParents.forEach(section => {
 						//SE OCULTAN LOS CAMPOS DE LAS CREDENCIALES GENERALES
 						section.classList.replace("flex", "hide");
 
@@ -358,7 +359,7 @@ let Servicios = {
 
 			//SI SE CAMBIA EL VALOR DEL COMBO DE CREDENCIALES GENERALES
 			if (elem.id == "ser_generalLogin"){
-				[...credentialsInputsParents].forEach(section => {
+				credentialsInputsParents.forEach(section => {
 					//SI EL VALOR ES "SÍ"
 					if (elem.value < 2){
 						//SE MUESTRAN LOS CAMPOS DE CREDENCIALES GENERALES
@@ -380,7 +381,7 @@ let Servicios = {
 
 			//SI SE CAMBIA EL VALOR DEL COMBO DE TIPO DE DOCUMENTO (SERVICIO DE MPILO)
 			if (elem.name == "tipodoc"){
-				let inputDato = document.querySelector("[name=nomdoc]");
+				const inputDato = document.querySelector("[name=nomdoc]");
 
 				switch (elem.value){
 					//DNI, RUC Y CARNÉ DE EXTRANJERÍA
@@ -397,128 +398,30 @@ let Servicios = {
 
 			//SI SE CAMBIA EL VALOR DEL COMBO DE TIPO DE BÚSQUEDA (SERVICIO DE SUNARP)
 			if (elem.name == "busquedaSUNARP"){
-				switch (parseInt(elem.value)){
-					case 1:
-						//Se muestran los bloques de búsqueda por nombre
-						[...document.querySelectorAll(".nombrecontribuyente")].forEach(el => el.classList.remove("hide"));
+				const 
+					clases = [".nombrecontribuyente", ".razonsocial", ".partidaregistral", ".numeroplaca"],
+					value = elem.value - 1;
 
-						//Los campos de búsqueda por nombre se vuelven obligatorios
-						[...document.querySelectorAll(".nombrecontribuyente input")].forEach(el => el.required = true);
+				clases.forEach((clase, i) => {
+					//Se mostrarán los bloques que correspondan con la opción elegida y sus elementos serán de llenado obligatorio
+					if (i == value){
+						document.querySelectorAll(clase).forEach(el => el.classList.remove("hide"));
+						document.querySelectorAll(`${clase}:has(input, select, textarea)`).forEach(child => child.required = true);
+					}
+					//Los bloques restantes se ocultarán y sus elementos no serán de llenado obligatorio
+					else{
+						document.querySelectorAll(clase).forEach(el => el.classList.add("hide"));
+						document.querySelectorAll(`${clase}:has(input, select, textarea)`).forEach(child => child.required = false);
+					}
+				});
 
-						//Se ocultan los campos de búsqueda por razón social
-						[...document.querySelectorAll(".razonsocial")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por razón social dejan de ser obligatorios
-						[...document.querySelectorAll(".razonsocial input")].forEach(el => el.required = false);
-
-						//Se ocultan los campos de búsqueda por n° de partida y oficina registral
-						[...document.querySelectorAll(".partidaregistral")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por n° de partida y oficina registral dejan de ser obligatorios
-						[...document.querySelectorAll(".partidaregistral input, .partidaregistral select")].forEach(el => el.required = false);
-
-						//Se ocultan los campos de búsqueda por n° de placa
-						[...document.querySelectorAll(".numeroplaca")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por n° de placa dejan de ser obligatorios
-						[...document.querySelectorAll(".numeroplaca input, .numeroplaca select")].forEach(el => el.required = false);
-
-						//Se le da el enfoque a la primera caja de texto
-						document.querySelector("[name=apellidopat]").focus();
-						break;
-
-					case 2:
-						//Se muestran los bloques de búsqueda por razón social
-						[...document.querySelectorAll(".razonsocial")].forEach(el => el.classList.remove("hide"));
-
-						//Los campos de búsqueda por razón social se vuelven obligatorios
-						[...document.querySelectorAll(".razonsocial input")].forEach(el => el.required = true);
-
-						//Se ocultan los campos de búsqueda por nombre
-						[...document.querySelectorAll(".nombrecontribuyente")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por nombre dejan de ser obligatorios
-						[...document.querySelectorAll(".nombrecontribuyente input")].forEach(el => el.required = false);
-
-						//Se ocultan los campos de búsqueda por n° de partida y oficina registral
-						[...document.querySelectorAll(".partidaregistral")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por n° de partida y oficina registral dejan de ser obligatorios
-						[...document.querySelectorAll(".partidaregistral input, .partidaregistral select")].forEach(el => el.required = false);
-
-						//Se ocultan los campos de búsqueda por n° de placa
-						[...document.querySelectorAll(".numeroplaca")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por n° de placa dejan de ser obligatorios
-						[...document.querySelectorAll(".numeroplaca input, .numeroplaca select")].forEach(el => el.required = false);
-
-						//Se le da el enfoque a la primera caja de texto
-						document.querySelector("[name=razonsocial]").focus();
-						break;
-
-					case 3:
-						//Se muestran los campos de búsqueda por n° de partida y oficina registral
-						[...document.querySelectorAll(".partidaregistral")].forEach(el => el.classList.remove("hide"));
-
-						//Los campos de búsqueda por n° de partida y oficina registral se vuelven obligatorios
-						[...document.querySelectorAll(".partidaregistral input, .partidaregistral select")].forEach(el => el.required = true);
-
-						//Se ocultan los bloques de búsqueda por nombre
-						[...document.querySelectorAll(".nombrecontribuyente")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por nombre dejan de ser obligatorios
-						[...document.querySelectorAll(".nombrecontribuyente input")].forEach(el => el.required = false);	
-
-						//Se ocultan los campos de búsqueda por razón social
-						[...document.querySelectorAll(".razonsocial")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por razón social dejan de ser obligatorios
-						[...document.querySelectorAll(".razonsocial input")].forEach(el => el.required = false);					
-
-						//Se ocultan los campos de búsqueda por n° de placa
-						[...document.querySelectorAll(".numeroplaca")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por n° de placa dejan de ser obligatorios
-						[...document.querySelectorAll(".numeroplaca input, .numeroplaca select")].forEach(el => el.required = false);
-
-						//Se le da el enfoque a la primera caja de texto
-						document.querySelector("[name=nropartida]").focus();
-						break;
-
-					case 4:
-						//Se muestran los campos de búsqueda por n° de placa
-						[...document.querySelectorAll(".numeroplaca")].forEach(el => el.classList.remove("hide"));
-
-						//Los campos de búsqueda por n° de placa se vuelven obligatorios
-						[...document.querySelectorAll(".numeroplaca input, .numeroplaca select")].forEach(el => el.required = true);
-
-						//Se ocultan los campos de búsqueda por n° de partida y oficina registral
-						[...document.querySelectorAll(".partidaregistral")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por n° de partida y oficina registral dejan de ser obligatorios
-						[...document.querySelectorAll(".partidaregistral input, .partidaregistral select")].forEach(el => el.required = false);
-
-						//Se ocultan los bloques de búsqueda por nombre
-						[...document.querySelectorAll(".nombrecontribuyente")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por nombre dejan de ser obligatorios
-						[...document.querySelectorAll(".nombrecontribuyente input")].forEach(el => el.required = false);			
-
-						//Se ocultan los campos de búsqueda por razón social
-						[...document.querySelectorAll(".razonsocial")].forEach(el => el.classList.add("hide"));
-
-						//Los campos de búsqueda por razón social dejan de ser obligatorios
-						[...document.querySelectorAll(".razonsocial input")].forEach(el => el.required = false);			
-
-						//Se le da el enfoque a la primera caja de texto
-						document.querySelector("[name=nroplaca]").focus();
-						break;
-				}
+				//Se le da el enfoque a la primera caja de texto disponible
+				document.querySelector(`${clases[value]} input:not([type=hidden])`)?.focus();
 			}
 
 			//SI SE CAMBIA EL VALOR DEL COMBO DE OFICINAS REGISTRALES (SERVICIO DE SUNARP, BÚSQUEDA POR N° DE PARTIDA)
 			if (elem.name == "oficinaregistral"){
-				let zona = document.querySelector("[name=zonaregistral]");
+				const zona = document.querySelector("[name=zonaregistral]");
 
 				//SI SE ELIGE UNA OFICINA REGISTRAL DE LA LISTA
 				zona.value = elem.value.length ? elem.options[elem.selectedIndex].dataset.zona : "";
@@ -526,7 +429,7 @@ let Servicios = {
 
 			//SI SE CAMBIA EL VALOR DEL COMBO DE OFICINAS REGISTRALES (SERVICIO DE SUNARP, BÚSQUEDA POR N° DE PLACA)
 			if (elem.name == "placaoficinaregistral"){
-				let zona = document.querySelector("[name=placazonaregistral]");
+				const zona = document.querySelector("[name=placazonaregistral]");
 
 				//SI SE ELIGE UNA OFICINA REGISTRAL DE LA LISTA
 				zona.value = elem.value.length ? elem.options[elem.selectedIndex].dataset.zona : "";
@@ -543,12 +446,12 @@ let Servicios = {
 	flag: true,
 
 	save: form => {
-		let btn = form.querySelector("[type=submit]"),
-			aux = btn.value;
-
 		if (Servicios.flag && Servicios.check.call(form)){
-			//Se muestra un mensaje de espera en el botón de guardado
-			btn.value = "Procesando datos...";
+			//Se muestra una ventana de espera
+			const wait = Modal.show({
+				text: "<img src='../../../img/wait.gif' class='wait' />",
+				media: true
+			});
 
 			//Se bloquean todos los elementos del formulario
 			Servicios.state.call(form);
@@ -562,10 +465,14 @@ let Servicios = {
 				data: form,
 				type: "json"
 			}).done(response => {
+				//Si la sesión se ha cerrado, se cancela la petición
 				if (Base.sessionClosed(response)) return;
 
+				//Se oculta la ventana de espera
+				Modal.hide(wait);
+
 				if (response.estado == "ok"){
-					//Se oculta la ventana modal
+					//Se ocultan todas las ventanas modales
 					Modal.hideAll();
 				}
 
@@ -575,13 +482,15 @@ let Servicios = {
 					time: response.tiempo || false
 				});
 
-				//Se recarga el listado de servicios
-				Servicios.loadServices();
-				
+				Servicios.loadServices(); //Se recarga el listado de servicios
 				Servicios.flag = true; //Se reactiva el comodín para procesar los datos
-				btn.value = aux; //El botón de envío obtiene su texto inicial
 				Servicios.state.call(form); //Se desbloquean todos los elementos del formulario
-			}).fail(error => Notification.msg(error));
+			}).fail(error => {
+				Servicios.flag = true; //Se reactiva el comodín para procesar los datos
+				Servicios.state.call(form); //Se desbloquean todos los elementos del formulario
+				Modal.hide(wait); //Se oculta la ventana de espera
+				Notification.msg(error); //Se muestra el mensaje de error
+			});
 		}
 	},
 
@@ -600,7 +509,8 @@ let Servicios = {
 			}
 
 			if (f[i].required && "minLength" in f[i] && f[i].minLength > 0 && f[i].value.length < f[i].minLength){
-				let underscorePos = f[i].name.indexOf("_"),
+				const 
+					underscorePos = f[i].name.indexOf("_"),
 					fieldName = f[i].name.substr(underscorePos > -1 ? underscorePos + 1 : 0),
 					minLength = f[i].minLength;
 
@@ -616,7 +526,8 @@ let Servicios = {
 			}
 
 			if (f[i].required && "maxLength" in f[i] && f[i].maxLength > 0 && f[i].value.length > f[i].maxLength){
-				let fieldName = f[i].name.substr(f[i].name.indexOf("_") ? f[i].name.indexOf("_") + 1 : 0),
+				const 
+					fieldName = f[i].name.substr(f[i].name.indexOf("_") ? f[i].name.indexOf("_") + 1 : 0),
 					maxLength = f[i].maxLength;
 
 				f[i].classList.add("required");
@@ -635,10 +546,12 @@ let Servicios = {
 	},
 
 	state: function(){
-		let self = this && "tagName" in this && this.tagName == "FORM" ? this : document.querySelector("form");
+		const 
+			self = this && "tagName" in this && this.tagName == "FORM" ? this : document.querySelector("form"),
+			elems = ["INPUT", "SELECT", "TEXTAREA"];
 
-		[...self.querySelectorAll("*")].forEach(elem => {
-			if (["INPUT", "SELECT", "TEXTAREA"].indexOf(elem.tagName) > -1){
+		self.querySelectorAll("*").forEach(elem => {
+			if (elems.indexOf(elem.tagName) > -1){
 				elem.disabled = !elem.disabled;
 			}
 			else{
@@ -788,7 +701,7 @@ let Servicios = {
 	},
 
 	deleteLogo: btn => {
-		let output = btn.parentNode.querySelector(".preview");
+		const output = btn.parentNode.querySelector(".preview");
 
 		Ajax({
 			url: "procesar.php",
@@ -813,22 +726,22 @@ let Servicios = {
 
 	loading: _ => Servicios.output.innerHTML = "<img src='../../../img/wait.gif' class='wait' />",
 
-	deleteWait: _ => [...document.querySelectorAll(".wait")].forEach(wait => wait.remove()),
+	deleteWait: _ => document.querySelectorAll(".wait").forEach(wait => wait.remove()),
 
 	getParams: form => {
-		let data = {};
+		const data = {};
 
-		for (let i = 0, f = form.elements, l = f.length; i < l; i++){
-			if (f[i].hasAttribute("data-rest") && f[i].name.length){
-				data[f[i].name] = f[i].value;
+		form.elements.forEach(elem => {
+			if (elem.hasAttribute("data-rest") && elem.name.length){
+				data[elem.name] = elem.value;
 			}
-		}
+		});
 
 		return data;
 	},
 
 	processSearch: (url, params, callback) => {
-		let results = document.querySelector("#results");
+		const results = document.querySelector("#results");
 		results.innerHTML = "<img src='../../../img/wait.gif' class='wait' />";
 		
 		Ajax({
@@ -837,6 +750,7 @@ let Servicios = {
 			data: params,
 			type: "json"
 		}).done(serviceResponse => {
+			//Si la sesión se ha cerrado, se cancela la petición
 			if (Base.sessionClosed(serviceResponse)) return;
 
 			//SI NO HUBO ERRORES
@@ -871,7 +785,8 @@ let Servicios = {
 	},
 
 	dateFormat: date => {
-		let year = date.substring(0, 4),
+		const 
+			year = date.substring(0, 4),
 			month = date.substring(4, 6),
 			day = date.substring(6);		
 
@@ -879,10 +794,10 @@ let Servicios = {
 	},
 
 	sortOffices: _ => {
-		let options = document.querySelectorAll("[name=oficinaregistral] option"),
+		const options = document.querySelectorAll("[name=oficinaregistral] option"),
 			temp = [];
 
-		for (let i = 1, l = options.length; i < l; i++){
+		for (const i = 1, l = options.length; i < l; i++){
 			temp.push({
 				value: options[i].value, 
 				text: options[i].text, 
@@ -892,7 +807,7 @@ let Servicios = {
 
 		temp.sort((a, b) => a.text > b.text ? 1 : (a.text < b.text ? -1 : 0));
 
-		for (let i = 1, l = options.length; i < l; i++){
+		for (const i = 1, l = options.length; i < l; i++){
 			options[i].value = temp[i - 1].value;
 			options[i].text = temp[i - 1].text;
 			options[i].dataset.zona = temp[i - 1].data;
@@ -900,7 +815,7 @@ let Servicios = {
 	},
 
 	addData: data => {
-		let output = document.querySelector("#results");
+		const output = document.querySelector("#results");
 
 		//Se limpia el contenido anterior
 		output.innerHTML = "";
@@ -909,14 +824,14 @@ let Servicios = {
 		output.insertAdjacentHTML("beforeend", "<h2>RESULTADOS DE LA BÚSQUEDA:</h2>");
 
 		if (Base.isObject(data)){
-			for (let attr in data){
+			for (const attr in data){
 				output.insertAdjacentHTML("beforeend", `<p class='rest'><b>${attr}:</b> ${data[attr]}</p>`);
 			}
 		}
 		else if (Base.isArray(data)){
 			data.forEach((obj, index) => {
 				if (Base.isObject(obj)){
-					for (let attr in obj){
+					for (const attr in obj){
 						output.insertAdjacentHTML("beforeend", `<p class='rest'><b>${attr}:</b> ${obj[attr]}</p>`);	
 					}
 				}

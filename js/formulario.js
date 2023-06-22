@@ -3,13 +3,14 @@
 let Form = {
 	flag: true,
 	save: function(time, checkCall){
-		let form = this,
-			btn = form.querySelector("[type=submit]"),
-			aux = btn.value;
+		const form = this;
 
 		if (Form.flag && Form.check.call(form)){
-			//Se muestra un mensaje de espera en el botón de guardado
-			btn.value = "Procesando datos...";
+			//Se muestra un ventana de espera
+			const wait = Modal.show({
+				text: "<img src='../../../img/wait.gif' class='wait' />",
+				media: true
+			});
 
 			//Se bloquean todos los elementos del formulario
 			Form.state.call(form);
@@ -22,11 +23,15 @@ let Form = {
 				method: form.method,
 				data: form,
 				type: "json"
-			}).done(response => {				
+			}).done(response => {	
+				//Si la sesión se ha cerrado, se cancela la petición			
 				if (Base.sessionClosed(response)) return;
 
+				//Se oculta la ventana de espera
+				Modal.hide(wait);
+
 				if (response.estado == "ok"){
-					//Se ocultan las ventanas modales
+					//Se ocultan todas las ventanas modales
 					Modal.hideAll();
 				}
 
@@ -39,10 +44,14 @@ let Form = {
 					Tablas.load(); //Se da formato al listado
 				}
 				
-				Form.flag = true; //Se reactiva el comodín para procesar los datos
-				btn.value = aux; //El botón de envío obtiene su texto inicial
+				Form.flag = true; //Se reactiva el comodín para procesar los datos				
 				Form.state.call(form); //Se desbloquean todos los elementos del formulario
-			}).fail(error => Notification.msg(error));
+			}).fail(error => {
+				Form.flag = true; //Se reactiva el comodín para procesar los datos				
+				Form.state.call(form); //Se desbloquean todos los elementos del formulario
+				Modal.hide(wait); //Se oculta la ventana de espera
+				Notification.msg(error); //Se muestra el mensaje de error
+			});
 		}
 	},
 

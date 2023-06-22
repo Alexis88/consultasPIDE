@@ -3,7 +3,7 @@
 let Usuarios = {
 	init: _ => {
 		document.addEventListener("input", e => {
-			let elem = e.target;
+			const elem = e.target;
 
 			//AUTOCOMPLETADO DE DATOS
 			if (elem.classList.contains("autocomplete")){
@@ -24,7 +24,7 @@ let Usuarios = {
 
 		//CONTROL DE CLICS
 		document.addEventListener("click", e => {
-			let elem = e.target;
+			const elem = e.target;
 
 			//AÑADIR DATOS DE IDENTIFICACIÓN DEL USUARIO EN UN SERVICIO
 			if (elem.id == "addService") Usuarios.addService();
@@ -35,7 +35,7 @@ let Usuarios = {
 
 		//SE HABILITAN/INHABILITAN LOS CAMPOS DE USUARIO Y CONTRASEÑA EN CASO DE QUE EL SERVICIO ELEGIDO LOS REQUIERA O NO
 		document.addEventListener("change", e => {
-			let elem = e.target, tr;
+			const elem = e.target, tr;
 
 			if (elem.name.indexOf("servicio") > -1){
 				tr = Base.getParent(elem, "tr");
@@ -51,7 +51,8 @@ let Usuarios = {
 	},
 
 	addService: _ => {
-		let tbody = document.querySelector("#services tbody"),
+		const 
+			tbody = document.querySelector("#services tbody"),
 			tr = [...tbody.querySelectorAll("tr")].pop().cloneNode(true);
 
 		tbody.appendChild(tr);
@@ -60,7 +61,7 @@ let Usuarios = {
 			.done(options => {
 				if (Base.sessionClosed(options)) return;
 				
-				let select = tr.querySelector("[name^=servicio]");
+				const select = tr.querySelector("[name^=servicio]");
 				
 				if (select){
 					select.innerHTML = options;
@@ -83,7 +84,8 @@ let Usuarios = {
 	},
 
 	delService: btn => {
-		let rows = document.querySelectorAll("#services tbody tr"), 
+		const 
+			rows = document.querySelectorAll("#services tbody tr"), 
 			tr = Base.getParent(btn, "tr");
 
 		if (Usuarios.checkData(btn)){
@@ -160,10 +162,11 @@ let Usuarios = {
 	},
 
 	checkData: btn => {
-		let tr = Base.getParent(btn, "tr"),
+		const 
+			tr = Base.getParent(btn, "tr"),
 			elems = tr.querySelectorAll("input, .delService");
 
-		for (let i = 0, l = elems.length; i < l; i++){
+		for (const i = 0, l = elems.length; i < l; i++){
 			if (("value" in elems[i] && elems[i].value.length) || elems[i].hasAttribute("data-id")){
 				return true;
 			}
@@ -183,9 +186,9 @@ let Usuarios = {
 			if (Base.sessionClosed(response)) return;
 
 			if (response.estado == "ok"){
-				let inputs = row.querySelectorAll("input"), credentialsLength;
+				const inputs = row.querySelectorAll("input"), credentialsLength;
 
-				[...inputs].forEach(input => {
+				inputs.forEach(input => {
 					if (response.login == "yes"){
 						credentialsLength = Object.values(response.credentials).length;
 
@@ -239,7 +242,7 @@ let Usuarios = {
 	},
 
 	cleanRow: row => {
-		[...row.querySelectorAll("input, select, [data-id], [data-user]")].forEach(elem => {
+		row.querySelectorAll("input, select, [data-id], [data-user]").forEach(elem => {
 			if (elem.tagName == "INPUT"){
 				elem.value = "";
 				elem.placeholder = "";
