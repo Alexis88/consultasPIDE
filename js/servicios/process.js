@@ -450,7 +450,12 @@ let Servicios = {
 			//Se muestra una ventana de espera
 			const wait = Modal.show({
 				text: "<img src='../../../img/wait.gif' class='wait' />",
-				media: true
+				media: true,
+				css: {
+					close: {
+						display: "none"
+					}
+				}
 			});
 
 			//Se bloquean todos los elementos del formulario
@@ -794,7 +799,8 @@ let Servicios = {
 	},
 
 	sortOffices: _ => {
-		const options = document.querySelectorAll("[name=oficinaregistral] option"),
+		const 
+			options = document.querySelectorAll("[name=oficinaregistral] option"),
 			temp = [];
 
 		for (const i = 1, l = options.length; i < l; i++){
@@ -889,8 +895,8 @@ let Servicios = {
 	}),
 
 	sunarp: params => Servicios.processSearch("sunarp/check.php", params, data => {
-		const response = data.response;
-		let output = document.querySelector("#results"), datos = [], temp;
+		const response = data.response, output = document.querySelector("#results"), datos = []; 
+		let temp;
 
 		switch (parseInt(params.busquedaSUNARP)){
 			case 1: case 2: //SI LA BÚSQUEDA FUE POR EL NOMBRE DEL CONTRIBUYENTE O RAZÓN SOCIAL

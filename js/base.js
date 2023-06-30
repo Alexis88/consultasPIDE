@@ -3,7 +3,7 @@
 let Base = {
 	init: _ => {
 		//Se establece el color de fondo previamente elegido
-		Base.loadTheme();		
+		//Base.loadTheme();		
 
 		//Si se cierra o actualiza la ventana, se coloca el scroll en la cima
 		window.addEventListener("beforeunload", _ => window.scrollTo(0, 0), false);
@@ -14,15 +14,10 @@ let Base = {
 
 			//Si se pulsa una etiqueta, se le da el enfoque al elemento previo
 			Base.getParent(elem, "form") && elem.tagName == "LABEL" && (el => {
-				let types = ["input", "select", "textarea"];
-				
-				for (let i = 0, l = types.length, ele; i < l; i++){
-					ele = el.parentNode.querySelector(types[i]);
-					if (ele){
-						ele.focus();
-						break;
-					}
-				}
+				["input", "select", "textarea"].some(tag => {
+					const ele = el.parentNode.querySelector(tag);
+					ele && ele.focus();
+				});
 			})(elem);			
 
 			//Si se pulsa sobre un elemento que requiere abrir su contenido por fuera
@@ -92,7 +87,8 @@ let Base = {
 
 	changeElementsTheme: _ => {
 		//El botón para cambiar el tema
-		let themeBtn = document.querySelector("#themeBtn"),
+		const 
+			themeBtn = document.querySelector("#themeBtn"),
 			menuBtn = document.querySelector("#open");
 
 		//Si previamente se ha establecido el tema oscuro
@@ -109,7 +105,7 @@ let Base = {
 			document.body.classList.add("dark");
 
 			//Se establece un fondo oscuro y texto claro para los elementos de formularios
-			[...document.querySelectorAll("[id^=modalFront] h1, [id^=modalFront] h2, [id^=modalFront] h3, [id^=modalFront] h4, [id^=modalFront] h5, p, [id^=modalFront] span, label, input, select, textarea")].forEach(label => label.classList.add("darkText"));
+			[...document.querySelectorAll("[id^=modalFront] :is(h1, h2, h3, h4, h5, span), p, label, input, select, textarea")].forEach(elem => elem.classList.add("darkText"));
 
 			//Se establece un fondo oscuro y texto claro para las opciones de los combos
 			[...document.querySelectorAll("option")].forEach(option => option.classList.add("darkSelect"));
@@ -140,7 +136,7 @@ let Base = {
 			[...document.querySelectorAll("table tbody tr")].forEach(tr => tr.classList.remove("darkRows"));
 
 			//Se retira el fondo oscuro y texto claro de los elementos de formularios
-			[...document.querySelectorAll("[id^=modalFront] h1, [id^=modalFront] h2, [id^=modalFront] h3, [id^=modalFront] h4, [id^=modalFront] h5, p, [id^=modalFront] span, label, input, select, textarea")].forEach(label => label.classList.remove("darkText"));
+			[...document.querySelectorAll("[id^=modalFront] :is(h1, h2, h3, h4, h5, span), p, label, input, select, textarea")].forEach(elem => elem.classList.remove("darkText"));
 
 			//Se retira el fondo oscuro y texto claro de las opciones de los combos
 			[...document.querySelectorAll("option")].forEach(option => option.classList.remove("darkSelect"));
@@ -266,5 +262,12 @@ let Base = {
 };
 
 document.addEventListener("readystatechange", function(){
-    this.readyState == "complete" && Base.init();
+    switch (this.readyState){
+    	case "interactive": default:
+    		Base.loadTheme();
+    		break;
+    	case "complete":
+    		Base.init();
+    		break;
+    }
 }, false);

@@ -43,7 +43,10 @@
 
 "use strict";
 
-let Ajax = function(opciones){
+const Ajax = function(opciones){
+    //Si no se recibieron argumentos, se aborta la ejecución
+    if (!opciones) throw new Error("Tiene que establecer una configuración");
+
     //Si el objeto "this" no es una instancia de la función Ajax, se retorna una llamada a dicha función con el operador "new" para poder devolver una instancia de la función
     if (!(this instanceof Ajax)) return new Ajax(opciones);
 
@@ -60,7 +63,7 @@ Ajax.prototype = {
     httpMethods: ["GET", "POST", "PUT", "DELETE", "HEAD"],
 
     //Lista de tipos de respuesta válidos
-    responseTypes: ["HTML", "JSON", "TEXT", "XML"], 
+    responseTypes: ["HTML", "JSON", "TEXT", "XML", "BLOB", "ARRAYBUFFER", "FORMDATA"], 
 
     //Método que inicializa todo el proceso
     init: function(opciones){
@@ -163,7 +166,7 @@ Ajax.prototype = {
         /* Otras opciones de configuración */
         
         //Opciones con sus valores por defecto
-        let opts = [
+        const opts = [
             {opt: "mode", def: "cors"},
             {opt: "cache", def: "default"},
             {opt: "credentials", def: "same-origin"},
@@ -253,7 +256,19 @@ Ajax.prototype = {
                             break;
 
                         case "XML":
-                            response.text().then(xml => callback(new window.DOMParser().parseFromString(xml, "text/xml")));
+                            response.text().then(xml => callback(new DOMParser().parseFromString(xml, "text/xml")));
+                            break;
+
+                        case "ARRAYBUFFER":
+                            response.arrayBuffer().then(buffer => callback(buffer));
+                            break;
+
+                        case "BLOB":
+                            response.blob().then(blob => callback(blob));
+                            break;
+
+                        case "FORMDATA":
+                            response.formData().then(form => callback(form));
                             break;
                     }
                 }
@@ -266,8 +281,8 @@ Ajax.prototype = {
                 console.log(error);
             }
 
-            //Se reinicia el contador de pulsaciones de la tecla ESC
-            this.ESC = 0;
+            //Se reinicia el contador de pulsaciones de la tecla CTRL
+            this.cancelButton = 0;
         });
 
         //Se devuelve una instancia del método Fetch
@@ -315,9 +330,9 @@ Ajax.serialize = function (elemento /* Formulario/Datos */, metodo, self, tipo /
             }
         }
 
-        //Se devuelven los datos, según sea el método HTTP elegido (Par: GET o HEAD | Impar o sin método: POST, PUT O DELETE)
+        //Se devuelven los datos, según sea el método HTTP elegido (NO: GET o HEAD | YES: POST, PUT O DELETE)
         if (flag == "no"){
-            return dataNoBody.join("&");
+            return new URLSearchParams(dataNoBody.join("&"));
         }
         else{
             return dataBody;
@@ -340,9 +355,9 @@ Ajax.serialize = function (elemento /* Formulario/Datos */, metodo, self, tipo /
             }
         }
 
-        //Se devuelven los datos, según sea el método HTTP elegido (Par: GET o HEAD | Impar o sin método: POST, PUT O DELETE)
+        //Se devuelven los datos, según sea el método HTTP elegido (NO: GET o HEAD | YES: POST, PUT O DELETE)
         if (flag == "no"){
-            return dataNoBody.join("&");
+            return new URLSearchParams(dataNoBody.join("&"));
         }
         else{
             return dataBody;
@@ -362,9 +377,9 @@ Ajax.serialize = function (elemento /* Formulario/Datos */, metodo, self, tipo /
             dataBody = elemento;
         }
 
-        //Se devuelven los datos, según sea el método HTTP elegido (Par: GET o HEAD | Impar o sin método: POST, PUT O DELETE)
+        //Se devuelven los datos, según sea el método HTTP elegido (NO: GET o HEAD | YES: POST, PUT O DELETE)
         if (flag == "no"){
-            return dataNoBody.join("&");
+            return new URLSearchParams(dataNoBody.join("&"));
         }
         else{
             return dataBody;
@@ -427,9 +442,9 @@ Ajax.serialize = function (elemento /* Formulario/Datos */, metodo, self, tipo /
             }
         }
 
-        //Se devuelven los datos, según sea el método HTTP elegido (Par: GET o HEAD | Impar o sin método: POST, PUT O DELETE)
+        //Se devuelven los datos, según sea el método HTTP elegido (NO: GET o HEAD | YES: POST, PUT O DELETE)
         if (flag == "no"){
-            return dataNoBody.join("&");
+            return new URLSearchParams(dataNoBody.join("&"));
         }
         else{
             return dataBody;
@@ -471,9 +486,9 @@ Ajax.serialize = function (elemento /* Formulario/Datos */, metodo, self, tipo /
             }
         }
 
-        //Se devuelven los datos, según sea el método HTTP elegido (Par: GET o HEAD | Impar o sin método: POST, PUT O DELETE)
+        //Se devuelven los datos, según sea el método HTTP elegido (NO: GET o HEAD | YES: POST, PUT O DELETE)
         if (flag == "no"){
-            return dataNoBody.join("&");
+            return new URLSearchParams(dataNoBody.join("&"));
         }
         else{
             return dataBody;

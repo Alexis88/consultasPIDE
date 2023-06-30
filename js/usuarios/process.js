@@ -35,7 +35,8 @@ let Usuarios = {
 
 		//SE HABILITAN/INHABILITAN LOS CAMPOS DE USUARIO Y CONTRASEÑA EN CASO DE QUE EL SERVICIO ELEGIDO LOS REQUIERA O NO
 		document.addEventListener("change", e => {
-			const elem = e.target, tr;
+			const elem = e.target; 
+			let tr;
 
 			if (elem.name.indexOf("servicio") > -1){
 				tr = Base.getParent(elem, "tr");
@@ -186,7 +187,8 @@ let Usuarios = {
 			if (Base.sessionClosed(response)) return;
 
 			if (response.estado == "ok"){
-				const inputs = row.querySelectorAll("input"), credentialsLength;
+				const inputs = row.querySelectorAll("input"); 
+				let credentialsLength;
 
 				inputs.forEach(input => {
 					if (response.login == "yes"){

@@ -153,7 +153,7 @@ table input, table select{
 		margin-right: 1%;		
 	}
 
-	#search input:not([type=date]):not(:focus) + label{
+	#search input:not([type=date], :focus) + label{
 		transform: translateY(1.25em) translateX(-.5em) scale(1.15);
 		font-weight: normal;
 		opacity: .5;
@@ -177,7 +177,7 @@ table input, table select{
 		width: 75%;
 	}
 
-	#search input:not([type=date]):not(:focus) + label{
+	#search input:not([type=date], :focus) + label{
 		transform: translateY(1.25em) translateX(0em) scale(1.15);
 		font-weight: normal;
 		opacity: .5;

@@ -9,7 +9,12 @@ let Form = {
 			//Se muestra un ventana de espera
 			const wait = Modal.show({
 				text: "<img src='../../../img/wait.gif' class='wait' />",
-				media: true
+				media: true,
+				css: {
+					close: {
+						display: "none"
+					}
+				}
 			});
 
 			//Se bloquean todos los elementos del formulario

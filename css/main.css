@@ -139,7 +139,9 @@ form label{
 
 /* GIF de espera */
 .wait{
-	width: 70px;
+	width: 70px !important;
+	min-width: 70px !important;
+	max-width: 70px !important;
 	display: block;
 	margin: 0 auto;
 }
@@ -345,7 +347,7 @@ a{
 	#addService:hover{
 		transform: scale(.95);	
 		font-weight: bold;	
-		color: #CD5C5C;
+		color: #CD5C5C !important;
 		border-color: #CD5C5C;
 		background-color: #fff;
 	}
