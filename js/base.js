@@ -263,7 +263,7 @@ let Base = {
 
 document.addEventListener("readystatechange", function(){
     switch (this.readyState){
-    	case "interactive": default:
+    	default:
     		Base.loadTheme();
     		break;
     	case "complete":
