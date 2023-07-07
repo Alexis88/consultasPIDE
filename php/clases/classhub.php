@@ -268,7 +268,8 @@ class ClassHub{
 			'partida' => isset($dominio['numeroPartida']) ? $dominio['numeroPartida'] : '-',
 			'estado' => isset($dominio['estado']) ? $dominio['estado'] : '-',
 			'zona' => isset($dominio['zona']) ? $dominio['zona'] : '-',
-			'oficina' => isset($dominio['oficina']) ? $dominio['oficina'] : '-'
+			'oficina' => isset($dominio['oficina']) ? $dominio['oficina'] : '-',
+			'download' => 'no'
 		];
 
 		if (array_key_exists('numeroDocumento', $dominio)){
@@ -334,6 +335,9 @@ class ClassHub{
 		if ($dataPreliminar){
 			//Si no se ha establecido la obtención de las imágenes de la partida
 			if (!$getPartida){
+				//Se adiciona un comodín que indicará que se encontró la partida y así se pueda descargarla
+				$tempData['download'] = 'yes';
+
 				//Se retornan los datos de la titularidad de dominio
 				return $tempData;
 			}
