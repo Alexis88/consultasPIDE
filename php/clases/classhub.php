@@ -261,27 +261,26 @@ class ClassHub{
 	//BUSCAR PARTIDAS REGISTRALES
 	public static function buscarPartidas($dominio, $url, $user, $pass){
 		$tempData = [
-			'tipoRegistro' => $dominio['registro'],
+			'tipoRegistro' => isset($dominio['registro']) ? $dominio['registro'] : '-',
 			'libro' => array_key_exists('libro', $dominio) ? $dominio['libro'] : '-',
 			'titular' => array_key_exists('apPaterno', $dominio) ? "{$dominio['apPaterno']} {$dominio['apMaterno']} {$dominio['nombre']}" : $dominio['razonSocial'],
-			'tipDoc' => $dominio['tipoDocumento'],
-			'partida' => $dominio['numeroPartida'],
-			'estado' => $dominio['estado'],
-			'zona' => $dominio['zona'],
-			'oficina' => $dominio['oficina'],
-			'img' => []
+			'tipDoc' => isset($dominio['tipoDocumento']) ? $dominio['tipoDocumento'] : '-',
+			'partida' => isset($dominio['numeroPartida']) ? $dominio['numeroPartida'] : '-',
+			'estado' => isset($dominio['estado']) ? $dominio['estado'] : '-',
+			'zona' => isset($dominio['zona']) ? $dominio['zona'] : '-',
+			'oficina' => isset($dominio['oficina']) ? $dominio['oficina'] : '-'
 		];
 
 		if (array_key_exists('numeroDocumento', $dominio)){
-			$tempData['numDoc'] = $dominio['numeroDocumento'];
+			$tempData['numDoc'] = isset($dominio['numeroDocumento']) ? $dominio['numeroDocumento'] : '-';
 		}
 
 		if (array_key_exists('direccion', $dominio)){
-			$tempData['direccion'] = $dominio['direccion'];
+			$tempData['direccion'] = isset($dominio['direccion']) ? $dominio['direccion'] : '-';
 		}
 
 		if (array_key_exists('numeroPlaca', $dominio)){
-			$tempData['placa'] = $dominio['numeroPlaca'];
+			$tempData['placa'] = isset($dominio['numeroPlaca']) ? $dominio['numeroPlaca'] : '-';
 		}		
 
 		//Se buscan los datos de la oficina asociada con los datos de la titularidad de dominio
@@ -302,13 +301,13 @@ class ClassHub{
 			'usuario' => $user,
 			'clave' => $pass,
 			'out' => 'json'
-		], $tempData);
+		], $tempData, false);
 		
 		//Se devuelve el conjunto final de resultados
 		return $tempData;
 	}
 
-	public static function partidas($url, $data, $tempData){		
+	public static function partidas($url, $data, $tempData, $getPartida){
 		$results = self::consumir([
 			'url' => $url,
 			'method' => 'GET',
@@ -330,6 +329,15 @@ class ClassHub{
 
 		//Se obtienen los asientos
 		$dataPreliminar = $results['listarAsientosSIRSARPResponse']['asientos'];
+
+		//Si se obtuvo los asientos
+		if ($dataPreliminar){
+			//Si no se ha establecido la obtención de las imágenes de la partida
+			if (!$getPartida){
+				//Se retornan los datos de la titularidad de dominio
+				return $tempData;
+			}
+		}
 
 		//Se forma el conjunto de datos a enviar a la consulta de la imagen de la partida
 		$data = [
@@ -389,7 +397,7 @@ class ClassHub{
 							//Se forma el conjunto de datos a enviar a la consulta
 							$data = array_merge($data, $temp);		
 
-							//Se realiza la búsqueda de la imagen de la partida		
+							//Se realiza la búsqueda
 							$results = self::getPartida($data);
 
 							//Si se encontró la imagen de la partida
@@ -459,7 +467,7 @@ class ClassHub{
 						}
 
 						//Se forma el conjunto de datos a enviar a la consulta
-						$data = array_merge($data, $temp);	
+						$data = array_merge($data, $temp);
 
 						//Se realiza la búsqueda de la imagen de la partida			
 						$results = self::getPartida($data);
