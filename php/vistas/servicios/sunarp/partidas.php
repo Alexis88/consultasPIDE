@@ -31,9 +31,37 @@ ob_start();
 </head>
 <body>
 <?php
-foreach ($img as $i){
+//Si no se recibió el conjunto de rutas en base 64 de las imágenes de la partida
+if (isset($img)){
+	//Se procede a obtenerlas
+	$data = ClassHub::userServiceData(ClassHub::myID(), $serviceID);
+	if (array_key_exists('login', $data) && $data['login'] < 2){
+		$user = $data['user'];
+		$pass = $data['pass'];
+	}
+
+	$url = 'https://ws5.pide.gob.pe/Rest/APide/Sunarp/WSServicelistarAsientosSIRSARP';
+	$img = ClassHub::partidas($url, [
+		'zona' => $zona,
+		'oficina' => $oficina,
+		'partida' => "$partida",
+		'registro' => "$registro",
+		'usuario' => $user,
+		'clave' => $pass,
+		'out' => 'json'
+	], [], true);
+}	
+
+if (count($img)){
+	foreach ($img as $i){
 ?>
-	<img src="data:image/jpeg;base64,<?=$i?>" />
+		<img src="data:image/jpeg;base64,<?=$i?>" />
+<?php
+	}
+}
+else{
+?>
+	<h1>No se encontraron las hojas de la partida</h1>
 <?php
 }
 ?>
@@ -46,5 +74,5 @@ $dompdf = new DOMPDF($options);
 $dompdf->loadHtml(ob_get_clean());
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-$dompdf->stream('MDP-PIDE-SUNARP-PARTIDA-REGISTRAL-' . $nropartida . '___' . date('d_m_Y') . '_' . date('H_m_s'), ['Attachment' => false]);
+$dompdf->stream('MDP-PIDE-SUNARP-PARTIDA-REGISTRAL-' . $partida . '___' . date('d_m_Y') . '_' . date('H_m_s'), ['Attachment' => false]);
 ?>

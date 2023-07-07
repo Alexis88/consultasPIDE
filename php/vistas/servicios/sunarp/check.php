@@ -148,7 +148,7 @@ switch ($busquedaSUNARP){
 		];
 
 		//Se buscan las partidas registrales
-		$results = ClassHub::partidas($url, $data, []);
+		$results = ClassHub::partidas($url, $data, [], true);
 
 		//Se evalúa si se obtuvo resultados de la búsqueda por n° de partida y oficina registral
 		if ($results){
@@ -230,6 +230,9 @@ else{
 
 			//Registro de control
 			ClassHub::control("(NOW(), '$accion', '$myIP', $myID)");
+
+			//Se adjunta el ID del servicio en la respuesta
+			$datos['serviceID'] = $serviceID;
 
 			//Se devuelve los resultados a la vista principal
 			echo json_encode([
