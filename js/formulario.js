@@ -1,6 +1,6 @@
 "use strict";
 
-let Form = {
+const Form = {
 	flag: true,
 	save: function(time, checkCall){
 		const form = this;
@@ -32,9 +32,7 @@ let Form = {
 				//Si la sesión se ha cerrado, se cancela la petición			
 				if (Base.sessionClosed(response)) return;
 
-				//Se oculta la ventana de espera
-				Modal.hide(wait);
-
+				//Si la respuesta es exitosa
 				if (response.estado == "ok"){
 					//Se ocultan todas las ventanas modales
 					Modal.hideAll();
@@ -48,14 +46,12 @@ let Form = {
 					Lista.search(); //Se recarga el listado
 					Tablas.load(); //Se da formato al listado
 				}
-				
-				Form.flag = true; //Se reactiva el comodín para procesar los datos				
-				Form.state.call(form); //Se desbloquean todos los elementos del formulario
-			}).fail(error => {
-				Form.flag = true; //Se reactiva el comodín para procesar los datos				
-				Form.state.call(form); //Se desbloquean todos los elementos del formulario
-				Modal.hide(wait); //Se oculta la ventana de espera
+			}).fail(error => {				
 				Notification.msg(error); //Se muestra el mensaje de error
+			}).always(_ => {
+				Modal.hide(wait); //Se oculta la ventana de espera
+				Form.flag = true; //Se reactiva el comodín para procesar los datos				
+				Form.state.call(form); //Se desbloquean todos los elementos del formulario
 			});
 		}
 	},
@@ -72,9 +68,9 @@ let Form = {
 	},
 
 	state: function(){
-		let self = this && "tagName" in this && this.tagName == "FORM" ? this : document.querySelector("form");
+		const self = this && "tagName" in this && this.tagName == "FORM" ? this : document.querySelector("form");
 
-		[].forEach.call(self.querySelectorAll("*"), elem => {
+		[...self.querySelectorAll("*")].forEach(elem => {
 			if (["INPUT", "SELECT", "TEXTAREA"].indexOf(elem.tagName) > -1){
 				elem.disabled = !elem.disabled;
 			}
@@ -85,7 +81,7 @@ let Form = {
 	}
 };
 
-document.addEventListener("submit", (e) => {
+document.addEventListener("submit", e => {
 	e.preventDefault();
 	Form.save.call(e.target, e.target.hasAttribute("data-time") ? e.target.dataset.time : null, e.target.hasAttribute("data-check") ? e.target.dataset.check : null);
 }, false);

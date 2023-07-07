@@ -1,15 +1,24 @@
 "use strict";
 
-var Files = {
+const Files = {
 	init: _ => {
+		//Se almacena el formulario
 		Files.form = document.querySelector("form");
 
+		//Se registran los eventos
+		Files.events();
+
+		//MIME types
+		Files.mimes = ["image/jpeg", "image/png", "image/bmp"];
+	},
+
+	events: _ => {
 		//Cuando se arrastre elementos sobre el objetivo
 		document.addEventListener("dragover", e => e.target.classList.contains("droppable") && Files.dragOver(e), false);
 
 		//Cuando se suelte elementos en el objetivo
 		document.addEventListener("drop", e => {
-			let elem = e.target;
+			const elem = e.target;
 
 			//Si el elemento está deshabilitado, no se hace nada
 			if (elem.classList.contains("disabled")){
@@ -26,7 +35,7 @@ var Files = {
 
 		//Cuando se ha seleccionado archivos
 		document.addEventListener("change", e => {
-			let elem = e.target;
+			const elem = e.target;
 
 			if (elem.type == "file"){
 				//Si el elemento está deshabilitado, no se hace nada
@@ -40,9 +49,6 @@ var Files = {
 				}				
 			}
 		}, false);
-
-		//MIME types
-		Files.mimes = ["image/jpeg", "image/png", "image/bmp"];
 
 		//Si se pulsa un elemento deshabilitado, se cancela la acción
 		document.addEventListener("click", e => {
@@ -60,7 +66,8 @@ var Files = {
 	},
 
 	dropChange: (e, btnFile) => {
-		let files, reader = new FileReader(), dropText;
+		const reader = new FileReader();
+		let files, dropText;
 
 		//Si se arrastra y suelta el archivo
 		if ("dataTransfer" in e){
@@ -98,7 +105,8 @@ var Files = {
 		//Se verifica que el archivo sea una imagen
 		Files.fileInfo(btnFile, files[0], dropText, info => {
 			//El elemento <img> que mostrará la vista previa
-			let preview = btnFile.parentNode.parentNode.querySelector(".preview"),
+			const 
+				preview = btnFile.parentNode.parentNode.querySelector(".preview"),
 				btn = btnFile.parentNode.parentNode.querySelector(".del");
 
 			//Una vez terminada la carga del archivo
@@ -127,7 +135,7 @@ var Files = {
 
 	fileInfo: (elem, file, dropText, callback) => {
 		//Se añade el archivo seleccionado a un objeto FormData
-		let data = new FormData();
+		const data = new FormData();
 		data.append("file", file);
 
 		//Si el archivo pesa más de 10 MB, se rechaza la solicitud
@@ -171,7 +179,7 @@ var Files = {
 	},
 
 	state: function(){
-		let self = this && "tagName" in this && this.tagName == "FORM" ? this : document.querySelector("form");
+		const self = this && "tagName" in this && this.tagName == "FORM" ? this : document.querySelector("form");
 
 		[...self.querySelectorAll("*")].forEach(elem => {
 			if (["INPUT", "SELECT", "TEXTAREA"].indexOf(elem.tagName) > -1){

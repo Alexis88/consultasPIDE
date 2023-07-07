@@ -1,6 +1,6 @@
 "use strict";
 
-let Menu = {
+const Menu = {
 	menubar: document.querySelector("#menu") || null,
 	open: document.querySelector("#open") || null,
 	close: document.querySelector("#salir") || null,
@@ -46,8 +46,7 @@ let Menu = {
 
 		//Si se pulsa una opción del menú
 		Menu.menubar.addEventListener("click", e => {
-			let elem = e.target;
-
+			const elem = e.target;
 			if (elem.tagName == "LI" && elem.hasAttribute("data-url")){
 				location = elem.dataset.url;
 			}
@@ -55,8 +54,7 @@ let Menu = {
 
 		//Si el menú está desplegado y se pulsa sobre alguna parte fuera del menú, este se replegará
 		document.addEventListener("click", e => {		
-			let elem = e.target;
-
+			const elem = e.target;
 			if (Menu.menubar.classList.contains("menuShow")){
 				if (["NAV", "LI"].indexOf(elem.tagName) < 0 || (elem.classList.contains("closeButton") || elem.id == "close")){
 					Menu.toggle();
@@ -66,13 +64,14 @@ let Menu = {
 
 		//Si se da un clic derecho a una opción del menú
 		window.addEventListener("contextmenu", e => {
-			let elem = e.target;
+			const elem = e.target;
 			if (elem.tagName == "LI" && elem.hasAttribute("data-url")) window.open(elem.dataset.url);
 		}, false);
 
 		//Si se posa el cursor sobre una opción del menú, se colocar el indicar sobre esta
 		document.addEventListener("mouseover", e => {
-			let elem = e.target, li;
+			const elem = e.target;
+			let li;
 
 			//Si es una opción del menú
 			if (elem.tagName == "LI"){

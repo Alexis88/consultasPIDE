@@ -1,9 +1,9 @@
 "use strict";
 
-let Buttons = {
+const Buttons = {
 	init: _ => {
 		document.addEventListener("click", e => {
-			let elem = e.target;
+			const elem = e.target;
 
 			//Añadir
 			if (elem.classList.contains("add")){
@@ -18,7 +18,8 @@ let Buttons = {
 	},
 
 	add: btn => {
-		let parent = btn.parentNode.parentNode,
+		const 
+			parent = btn.parentNode.parentNode,
 			blocks = parent.querySelectorAll("." + btn.dataset.class),
 			next = btn.parentNode.nextElementSibling,
 			copy = next.cloneNode(true),
@@ -30,12 +31,12 @@ let Buttons = {
 	},
 
 	del: btn => {
-		let parent = btn.parentNode.parentNode,
+		const 
+			parent = btn.parentNode.parentNode,
 			actual = btn.parentNode,
 			hidden = actual.querySelectorAll("[type=hidden]"),
 			blocks = parent.querySelectorAll("." + btn.dataset.class), 
-			count = Buttons.countRemove("." + btn.dataset.class),
-			id = {}, name;
+			count = Buttons.countRemove("." + btn.dataset.class);
 
 		//Si hay bloques que pueden clonarse
 		if (blocks.length){
@@ -119,7 +120,7 @@ let Buttons = {
 		if (dato && {}.toString.call(dato) !== "[object Function]" && dato.length) data['dato'] = dato;
 
 		//Se almacenan los ID contenidos en los elementos ocultos
-		[...hide].forEach(el => {
+		hide.forEach(el => {
 			if (el.name.indexOf("id_") > -1){
 				name = el.name.indexOf("[") > -1 ? el.name.substring(0, el.name.indexOf("[")) : el.name;
 				data[name] = el.value;
@@ -148,7 +149,7 @@ let Buttons = {
 
 	clean: block => {
 		//Se limpian los elementos contenidos en el bloque
-		[...block.querySelectorAll("*")].forEach(el => {
+		block.querySelectorAll("*").forEach(el => {
 			switch (el.tagName.toLowerCase()){
 				case "input": 
 					switch (el.type){
@@ -188,7 +189,7 @@ let Buttons = {
 
 	countRemove: identifier => {
 		//Se devuelve el número de elementos que poseen el identificador recibido
-		let result = document.querySelectorAll(identifier);
+		const result = document.querySelectorAll(identifier);
 		return "length" in result ? result.length : -1;
 	},
 

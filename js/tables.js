@@ -1,4 +1,4 @@
-/*
+/**
  * TABLAS DE DISEÑO ADAPTABLE
  * 
  * Este script adapta a todas las tablas HTML presentes en el documento 
@@ -14,7 +14,7 @@
 
 "use strict";
 
-let Tablas = {
+const Tablas = {
 	load: _ => {
 		Tablas.th = Tablas.th || [];
 		Tablas.nodes = document.querySelectorAll("table");
@@ -22,7 +22,7 @@ let Tablas = {
 	},
 
 	change: _ => {
-		[...Tablas.nodes].forEach((tabla, index) => {
+		Tablas.nodes.forEach((tabla, index) => {
 			let tr = tabla.querySelectorAll("tbody tr"), //Filas de la tabla
 				th,	//Variable que almacenará a la primera cabecera
 				thContent = {content: [], padding: []}, //Objeto con el contenido de las cabeceras de la tabla
@@ -30,7 +30,7 @@ let Tablas = {
 				length; //Variable que almacenará el total de cabeceras
 
 			//Se recorre el conjunto de cabeceras
-			[...ths].forEach(t => {
+			ths.forEach(t => {
 				//Si la fila tiene contenido
 				if (t.innerHTML.length){
 					//Se toma el contenido de cada cabecera y se almacena en la propiedad "content" del objeto que contiene un arreglo
@@ -66,7 +66,7 @@ let Tablas = {
 				th.style.padding = 0;
 
 				//Se recorren todas las filas del cuerpo de la tabla
-				[...tr].forEach(f => {
+				tr.forEach(f => {
 					let td = f.querySelectorAll("td"), //Conjunto de celdas de la fila
 						div, //<div> que almacenará todo el contenido de la fila
 						arr = [], //Arreglo que almacenará a todos los <div>
@@ -76,7 +76,7 @@ let Tablas = {
 					if (td.length < 2) return;
 
 					//Se recorren todas las celdas de cada fila
-					[...td].forEach((c, i) => {
+					td.forEach((c, i) => {
 						//Se toma el texto de la cabecera correspondiente
 						txt = Tablas.th[index]?.content[i];
 
@@ -121,13 +121,13 @@ let Tablas = {
 				});
 
 				//Se hace una copia de los contenidos de cada celda
-				[...tabla.querySelectorAll("tbody tr")].forEach((tr, i) => {
+				tabla.querySelectorAll("tbody tr").forEach((tr, i) => {
 					arr[i] = [];
-					[...tr.querySelectorAll("td .content")].forEach(c => arr[i].push(c.innerHTML));
+					tr.querySelectorAll("td .content").forEach(c => arr[i].push(c.innerHTML));
 				});
 
 				//Se restauran las celdas con sus contenidos
-				[...tabla.querySelectorAll("tbody tr")].forEach((tr, i) => {
+				tabla.querySelectorAll("tbody tr").forEach((tr, i) => {
 					first = tr.querySelector("td");
 					
 					//Si hay contenido para la primera celda, se restaura

@@ -786,6 +786,9 @@ let Servicios = {
 		}).fail(error => {
 			Notification.msg(error);
 			results.innerHTML = "";
+		}).always(_ => {
+			const wait = results.querySelector(".wait");
+			wait && wait.remove();
 		});
 	},
 
@@ -905,10 +908,8 @@ let Servicios = {
 					//SE ESTABLECE EL ARREGLO QUE ALBERGARÁ LAS PARTIDAS
 					let partidas;
 
-					//SE RECORRE EL CONJUNTO DE IMÁGENES DE LA PARTIDA DE LA ITERACIÓN ACTUAL
-					if (dominio["img"].length){
-						partidas = `<span class="verPartida" title="Ver partida registral" style="display: inline-block;" data-partida="nropartida=${dominio["partida"]}&img[]=${dominio['img'].join('&img[]=')}">Ver partida</span>`;
-					}
+					//SE ESTABLECE EL BOTÓN DE DESCARGA DE LA PARTIDA
+					partidas = `<span class="verPartida" title="Ver partida registral" style="display: inline-block;" data-partida="zona=${dominio['zona']}&oficina=${dominio['oficina']}&partida=${dominio['partida']}&registro=${dominio['registro']}&serviceID=${dominio['serviceID']}">Ver partida</span>`;
 
 					//SE GENERA EL CONJUNTO DE DATOS A MOSTRAR
 					temp = {
@@ -940,7 +941,7 @@ let Servicios = {
 			case 3: //SI LA BÚSQUEDA FUE POR EL N° DE PARTIDA Y OFICINA REGITRAL
 				//SE RECORRE EL CONJUNTO DE IMÁGENES DE LA PARTIDA DE LA ITERACIÓN ACTUAL
 				if (response["img"].length){
-					datos = `<span class="verPartida" title="Ver partida registral" style="display:block; margin: 0 auto; width: max-content;" data-partida="nropartida=${params.nropartida}&img[]=${response['img'].join('&img[]=')}">Ver partida</span>`;
+					datos = `<span class="verPartida" title="Ver partida registral" style="display:block; margin: 0 auto; width: max-content;" data-partida="partida=${params.nropartida}&img[]=${response['img'].join('&img[]=')}">Ver partida</span>`;
 				}
 				break;
 

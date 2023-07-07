@@ -1,6 +1,6 @@
 "use strict";
 
-let Usuarios = {
+const Usuarios = {
 	init: _ => {
 		document.addEventListener("input", e => {
 			const elem = e.target;
@@ -167,7 +167,7 @@ let Usuarios = {
 			tr = Base.getParent(btn, "tr"),
 			elems = tr.querySelectorAll("input, .delService");
 
-		for (const i = 0, l = elems.length; i < l; i++){
+		for (let i = 0, l = elems.length; i < l; i++){
 			if (("value" in elems[i] && elems[i].value.length) || elems[i].hasAttribute("data-id")){
 				return true;
 			}

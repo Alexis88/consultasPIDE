@@ -13,14 +13,12 @@ window.Scroll = {
 				data: Ajax.serialize(args.data) + "&base=" + args.base
 			}).done(response => {				
 				if (Base.sessionClosed(response)) return;
-				args.tbody.innerHTML += response;
-				setTimeout(_=> Scroll.flag = true, 1000);
+				args.tbody.innerHTML += response;				
 				args.callback && {}.toString.call(args.callback) == "[object Function]" && args.callback();
 				Tablas.load();
 			}).fail(error => {
 				Notification.msg(error);
-				args.tbody.innerHTML = content;
-			});
+			}).always(_ => setTimeout(_=> Scroll.flag = true, 1000));
 		}
 	},
 

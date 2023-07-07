@@ -1,11 +1,16 @@
 "use strict";
 
-let Login = {
+const Login = {
 	flag: true,
 	init: _ => {
 		//Se cargan los datos del almacenamiento local
 		Login.loadStorage();
 
+		//Se registran los eventos
+		Login.events();
+	},
+
+	events: _ => {
 		//Envío de datos para identificar al usuario
 		document.addEventListener("submit", e => {
 			e.preventDefault();
@@ -20,17 +25,18 @@ let Login = {
 
 		//Control de clics
 		document.addEventListener("click", e => {
-			let elem = e.target;
+			const elem = e.target;
 
-			//Si se pulsa en el slider o el texto del costado
+			//Si se pulsa en el slider o en su etiqueta
 			if (elem.classList.contains("slide")){
 				Login.slide();
 			}
-		}, false);	
+		}, false);
 	},
 
 	slide: _ => {
-		let slider = document.querySelector("#slider"),
+		const 
+			slider = document.querySelector("#slider"),
 			sliderBtn = document.querySelector("#sliderBtn");
 
 		if (slider.classList.contains("on")){
@@ -50,7 +56,7 @@ let Login = {
 
 		//Si hay una configuración anterior, se copian los datos y se elimina dicha configuración
 		if (localStorage.rememberPIDE){
-			let temp = JSON.parse(localStorage.rememberPIDE);
+			const temp = JSON.parse(localStorage.rememberPIDE);
 
 			Login.remember = {
 				user: temp.check ? temp.user : "",
@@ -63,7 +69,8 @@ let Login = {
 		}
 
 		if (Object.values(Login.remember).length){
-			let user = document.querySelector("#user"),
+			const 
+				user = document.querySelector("#user"),
 				pass = document.querySelector("#pass"),
 				slider = document.querySelector("#slider"),
 				sliderBtn = document.querySelector("#sliderBtn");
@@ -84,7 +91,8 @@ let Login = {
 	},
 
 	saveStorage: _ => {
-		let user = document.querySelector("#user"),
+		const 
+			user = document.querySelector("#user"),
 			pass = document.querySelector("#pass"),
 			slider = document.querySelector("#slider"),
 			state = slider.classList.contains("on");
@@ -99,7 +107,8 @@ let Login = {
 	},
 
 	save: function(){
-		let btn = this.querySelector("[type=submit]"),
+		const 
+			btn = this.querySelector("[type=submit]"),
 			aux = btn.value;
 
 		if (Login.flag && Login.check.call(this)){
@@ -121,9 +130,6 @@ let Login = {
 				//Si se produjo un error
 				if (response.estado == "error"){
 					Notification.msg({text: response.mensaje, time: 5000});
-					Login.flag = true; //Se reactiva el comodín para procesar los datos
-					btn.value = aux; //El botón de envío obtiene su texto inicial
-					Login.state.call(this); //Se desbloquean todos los elementos del formulario
 				}
 				//Si no se produjo un error
 				else{
@@ -134,9 +140,13 @@ let Login = {
 				}
 			}).fail(error => Notification.msg({
 				text: error, 
-				onShow: _ => location.reload(true), 
+				onHide: _ => location.reload(true), 
 				background: true
-			}));
+			})).always(_ => {
+				Login.flag = true; //Se reactiva el comodín para procesar los datos
+				btn.value = aux; //El botón de envío obtiene su texto inicial
+				Login.state.call(this); //Se desbloquean todos los elementos del formulario
+			});
 		}
 	},
 
@@ -152,9 +162,9 @@ let Login = {
 	},
 
 	state: function(){
-		let self = this && "tagName" in this && this.tagName == "FORM" ? this : document.querySelector("form");
+		const self = this && "tagName" in this && this.tagName == "FORM" ? this : document.querySelector("form");
 
-		[].forEach.call(self.querySelectorAll("*"), elem => {
+		[...self.querySelectorAll("*")].forEach(elem => {
 			if (["INPUT", "SELECT", "TEXTAREA"].indexOf(elem.tagName) > -1){
 				elem.disabled = !elem.disabled;
 			}

@@ -122,7 +122,7 @@ form{
 	#data [type=submit]:hover{
 		transform: scale(.95);
 		font-weight: bold;	
-		color: #FFFFEF !important;
+		color: #FFFFEF;
 		background-color: #008080;
 	}
 }

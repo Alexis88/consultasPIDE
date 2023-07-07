@@ -1,16 +1,21 @@
 "use strict";
 
-let Base = {
+const Base = {
 	init: _ => {
-		//Se establece el color de fondo previamente elegido
-		//Base.loadTheme();		
+		//Se registran los eventos
+		Base.events();
 
+		//Se muestra una ventana modal en caso de detectarse datos adjuntos en la URI
+		Base.checkURI();
+	},
+
+	events: _ => {
 		//Si se cierra o actualiza la ventana, se coloca el scroll en la cima
 		window.addEventListener("beforeunload", _ => window.scrollTo(0, 0), false);
 
 		//Control de clics
 		document.addEventListener("click", e => {
-			let elem = e.target;
+			const elem = e.target;
 
 			//Si se pulsa una etiqueta, se le da el enfoque al elemento previo
 			Base.getParent(elem, "form") && elem.tagName == "LABEL" && (el => {
@@ -35,7 +40,7 @@ let Base = {
 
 			//Si se pulsa una etiqueta, se le da el enfoque al elemento previo
 			Base.getParent(e.target, "form") && e.target.tagName == "LABEL" && (elem => {
-				let types = ["input", "select", "textarea"];
+				const types = ["input", "select", "textarea"];
 				
 				for (let i = 0, l = types.length, el; i < l; i++){
 					el = elem.parentNode.querySelector(types[i]);
@@ -61,9 +66,6 @@ let Base = {
 			text: "<img src='../../../img/offline.png' class='notificationImg' /> Su conexión a internet se ha interrumpido. Le recomendamos esperar a que se restablezca para continuar usando el sistema.",
 			time: 5000
 		}));
-
-		//Se muestra una ventana modal en caso de detectarse datos adjuntos en la URI
-		Base.checkURI();
 	},
 
 	loadTheme: _ => {
@@ -105,16 +107,16 @@ let Base = {
 			document.body.classList.add("dark");
 
 			//Se establece un fondo oscuro y texto claro para los elementos de formularios
-			[...document.querySelectorAll("[id^=modalFront] :is(h1, h2, h3, h4, h5, span), p, label, input, select, textarea")].forEach(elem => elem.classList.add("darkText"));
+			document.querySelectorAll("[id^=modalFront] :is(h1, h2, h3, h4, h5, span), p, label, input, select, textarea").forEach(elem => elem.classList.add("darkText"));
 
 			//Se establece un fondo oscuro y texto claro para las opciones de los combos
-			[...document.querySelectorAll("option")].forEach(option => option.classList.add("darkSelect"));
+			document.querySelectorAll("option").forEach(option => option.classList.add("darkSelect"));
 
 			//Se establece un fondo oscuro y texto claro para los botones de envío de los formularios
-			[...document.querySelectorAll("[type=submit]")].forEach(btn => btn.classList.add("darkSubmit"));
+			document.querySelectorAll("[type=submit]").forEach(btn => btn.classList.add("darkSubmit"));
 
 			//Se establece un fondo oscuro y texto claro para las filas de las tablas
-			[...document.querySelectorAll("table tbody tr")].forEach(tr => tr.classList.add("darkRows"));
+			document.querySelectorAll("table tbody tr").forEach(tr => tr.classList.add("darkRows"));
 
 			//Se establece un color claro para el botón de apertura del menú
 			menuBtn.classList.add("darkMenuBtn");
@@ -133,16 +135,16 @@ let Base = {
 			document.body.classList.remove("dark");
 
 			//Se retira el fondo oscuro y texto claro de las filas de las tablas
-			[...document.querySelectorAll("table tbody tr")].forEach(tr => tr.classList.remove("darkRows"));
+			document.querySelectorAll("table tbody tr").forEach(tr => tr.classList.remove("darkRows"));
 
 			//Se retira el fondo oscuro y texto claro de los elementos de formularios
-			[...document.querySelectorAll("[id^=modalFront] :is(h1, h2, h3, h4, h5, span), p, label, input, select, textarea")].forEach(elem => elem.classList.remove("darkText"));
+			document.querySelectorAll("[id^=modalFront] :is(h1, h2, h3, h4, h5, span), p, label, input, select, textarea").forEach(elem => elem.classList.remove("darkText"));
 
 			//Se retira el fondo oscuro y texto claro de las opciones de los combos
-			[...document.querySelectorAll("option")].forEach(option => option.classList.remove("darkSelect"));
+			document.querySelectorAll("option").forEach(option => option.classList.remove("darkSelect"));
 
 			//Se retira el fondo oscuro y texto claro de los botones de envío de los formularios
-			[...document.querySelectorAll("[type=submit]")].forEach(btn => btn.classList.remove("darkSubmit"));
+			document.querySelectorAll("[type=submit]").forEach(btn => btn.classList.remove("darkSubmit"));
 
 			//Se retira el color claro del botón de apertura del menú
 			menuBtn.classList.remove("darkMenuBtn");
@@ -150,7 +152,8 @@ let Base = {
 	},
 
 	checkURI: _ => {
-		let url = document.URL, id, ruta;
+		const url = document.URL;
+		let id, ruta;
 
 		if (url.indexOf("#") > -1){
 			id = url.substring(url.indexOf("#") + 1);

@@ -1,10 +1,10 @@
 "use strict";
 
-let Check = {
-	init: () => {
+const Check = {
+	init: _ => {
 		//Control de escritura
-		document.addEventListener("keypress", (e) => {
-			let elem = e.target;
+		document.addEventListener("keypress", e => {
+			const elem = e.target;
 
 			//Si es un <input>
 			if (elem.tagName == "INPUT" || elem.tagName == "TEXTAREA"){
@@ -29,8 +29,8 @@ let Check = {
 		}, false);
 
 		//Control de pegado
-		document.addEventListener("paste", (e) => {
-			let elem = e.target, copy = e.clipboardData.getData("text").trim();
+		document.addEventListener("paste", e => {
+			const elem = e.target, copy = e.clipboardData.getData("text").trim();
 
 			//Si es un <input>
 			if (elem.tagName == "INPUT" || elem.tagName == "TEXTAREA"){
