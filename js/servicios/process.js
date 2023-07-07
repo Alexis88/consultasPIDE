@@ -909,7 +909,9 @@ let Servicios = {
 					let partidas;
 
 					//SE ESTABLECE EL BOTÓN DE DESCARGA DE LA PARTIDA
-					partidas = `<span class="verPartida" title="Ver partida registral" style="display: inline-block;" data-partida="zona=${dominio['zona']}&oficina=${dominio['oficina']}&partida=${dominio['partida']}&registro=${dominio['registro']}&serviceID=${dominio['serviceID']}">Ver partida</span>`;
+					if (dominio["download"] == "yes"){
+						partidas = `<span class="verPartida" title="Ver partida registral" style="display: inline-block;" data-partida="zona=${dominio['zona']}&oficina=${dominio['oficina']}&partida=${dominio['partida']}&registro=${dominio['registro']}&serviceID=${dominio['serviceID']}">Ver partida</span>`;
+					}
 
 					//SE GENERA EL CONJUNTO DE DATOS A MOSTRAR
 					temp = {
