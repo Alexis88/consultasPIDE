@@ -32,7 +32,7 @@ ob_start();
 <body>
 <?php
 //Si no se recibió el conjunto de rutas en base 64 de las imágenes de la partida
-if (isset($img)){
+if (!isset($img)){
 	//Se procede a obtenerlas
 	$data = ClassHub::userServiceData(ClassHub::myID(), $serviceID);
 	if (array_key_exists('login', $data) && $data['login'] < 2){
@@ -50,12 +50,16 @@ if (isset($img)){
 		'clave' => $pass,
 		'out' => 'json'
 	], [], true);
-}	
+}
 
-if (count($img)){
-	foreach ($img as $i){
+if (!is_null($img)){
+	if (isset($img['img']) && count($img['img'])){
+		$img = $img['img'];
+	}
+
+	foreach ($img as $pagina){
 ?>
-		<img src="data:image/jpeg;base64,<?=$i?>" />
+		<img src="data:image/jpeg;base64,<?=$pagina?>" />
 <?php
 	}
 }

@@ -231,13 +231,11 @@ else{
 			//Registro de control
 			ClassHub::control("(NOW(), '$accion', '$myIP', $myID)");
 
-			//Se adjunta el ID del servicio en la respuesta
-			$datos['serviceID'] = $serviceID;
-
 			//Se devuelve los resultados a la vista principal
 			echo json_encode([
 				'estado' => 'ok',
-				'response' => $datos
+				'response' => $datos,
+				'serviceID' => $serviceID
 			]);
 			break;
 
