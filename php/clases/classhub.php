@@ -269,6 +269,7 @@ class ClassHub{
 			'estado' => isset($dominio['estado']) ? $dominio['estado'] : '-',
 			'zona' => isset($dominio['zona']) ? $dominio['zona'] : '-',
 			'oficina' => isset($dominio['oficina']) ? $dominio['oficina'] : '-',
+			'registro' => array_key_exists('numeroPlaca', $dominio) ? '24000' : '21000',
 			'download' => 'no'
 		];
 
@@ -292,6 +293,10 @@ class ClassHub{
 			//Se devuelven los datos de la titularidad
 			return $tempData;
 		}
+
+		//Se adicionan los códigos de la zona y oficina registral
+		$tempData['codZona'] = $oficina['zona'];
+		$tempData['codOficina'] = $oficina['oficina'];
 
 		//Se busca los asientos correspondientes a la partida de la iteración actual
 		$tempData = self::partidas($url, [
