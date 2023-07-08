@@ -473,9 +473,7 @@ let Servicios = {
 				//Si la sesión se ha cerrado, se cancela la petición
 				if (Base.sessionClosed(response)) return;
 
-				//Se oculta la ventana de espera
-				Modal.hide(wait);
-
+				//Si la respuesta fue satisfactoria
 				if (response.estado == "ok"){
 					//Se ocultan todas las ventanas modales
 					Modal.hideAll();
@@ -487,14 +485,14 @@ let Servicios = {
 					time: response.tiempo || false
 				});
 
-				Servicios.loadServices(); //Se recarga el listado de servicios
-				Servicios.flag = true; //Se reactiva el comodín para procesar los datos
-				Servicios.state.call(form); //Se desbloquean todos los elementos del formulario
-			}).fail(error => {
+				//Se recarga el listado de servicios
+				Servicios.loadServices();
+			}).fail(error => {				
+				Notification.msg(error); //Se muestra el mensaje de error
+			}).always(_ => {
 				Servicios.flag = true; //Se reactiva el comodín para procesar los datos
 				Servicios.state.call(form); //Se desbloquean todos los elementos del formulario
 				Modal.hide(wait); //Se oculta la ventana de espera
-				Notification.msg(error); //Se muestra el mensaje de error
 			});
 		}
 	},
@@ -595,10 +593,9 @@ let Servicios = {
 						if (response.length){
 							Servicios.output.innerHTML += response;
 						}
-
-						//SE VUELVE A HABILITAR LA CARGA
-						setTimeout(_=> Servicios.scrollFlag = true, 1000);
-					}).fail(error => Notification.msg(error));
+					})
+					.fail(error => Notification.msg(error))
+					.always(_ => setTimeout(_=> Servicios.scrollFlag = true, 1000)); //SE VUELVE A HABILITAR LA CARGA
 				}
 			}
 		}
@@ -786,10 +783,7 @@ let Servicios = {
 		}).fail(error => {
 			Notification.msg(error);
 			results.innerHTML = "";
-		}).always(_ => {
-			const wait = results.querySelector(".wait");
-			wait && wait.remove();
-		});
+		}).always(_ => results.querySelector(".wait")?.remove());
 	},
 
 	dateFormat: date => {
@@ -898,8 +892,8 @@ let Servicios = {
 	}),
 
 	sunarp: params => Servicios.processSearch("sunarp/check.php", params, data => {
-		const response = data.response, output = document.querySelector("#results"), datos = []; 
-		let temp;
+		const response = data.response, output = document.querySelector("#results"); 
+		let temp, datos = [];
 
 		switch (parseInt(params.busquedaSUNARP)){
 			case 1: case 2: //SI LA BÚSQUEDA FUE POR EL NOMBRE DEL CONTRIBUYENTE O RAZÓN SOCIAL
@@ -910,7 +904,7 @@ let Servicios = {
 
 					//SE ESTABLECE EL BOTÓN DE DESCARGA DE LA PARTIDA
 					if (dominio["download"] == "yes"){
-						partidas = `<span class="verPartida" title="Ver partida registral" style="display: inline-block;" data-partida="zona=${dominio['zona']}&oficina=${dominio['oficina']}&partida=${dominio['partida']}&registro=${dominio['registro']}&serviceID=${dominio['serviceID']}">Ver partida</span>`;
+						partidas = `<span class="verPartida" title="Ver partida registral" style="display: inline-block;" data-partida="zona=${dominio['codZona']}&oficina=${dominio['codOficina']}&partida=${dominio['partida']}&registro=${dominio['registro']}&serviceID=${data['serviceID']}">Ver partida</span>`;
 					}
 
 					//SE GENERA EL CONJUNTO DE DATOS A MOSTRAR
